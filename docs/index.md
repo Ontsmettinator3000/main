@@ -1,37 +1,32 @@
-## Welcome to GitHub Pages
+# Ontsmetting
 
-You can use the [editor on GitHub](https://github.com/Ontsmettinator3000/main/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+## Vooruitgang
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Vrijdag 12/02
 
-### Markdown
+- Servo getest:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+  De servo is niet krachtig genoeg om de pomp in te drukken.
+  Gebruik van een pomp of krachtige stappenmotor is nodig.
 
-```markdown
-Syntax highlighted code block
+- Level convertor:
 
-# Header 1
-## Header 2
-### Header 3
+  De Level convertor zet 3.3V om in 5V of omgekeerd. Hiervoor zijn voedingsspanningen van beide levels nodig.
 
-- Bulleted
-- List
+- IR beam getes
 
-1. Numbered
-2. List
+  De beam kan gebruikt worden als voorwerp detector. Hievoor plaatsen we de twee modules naast elkaar. De reflectie zal zorgen voor een geldige meting. De maximale afstand is ongeveer 8cm.
 
-**Bold** and _Italic_ and `Code` text
+## Onderdelen
 
-[Link](url) and ![Image](src)
-```
+### Handdetectie
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Voor het dedecteren van een hand maken we gebruik van een IR beam. Deze digitale sensor zal een hoog niveau geven als het IR-signaal invalt. Door de twee modules naast elkaar te plaatsen kunnen we gebruik maken van reflectie om een object te dedecteren. Hierdoor is slecht langs één kant een module vereist.
 
-### Jekyll Themes
+### Identificatie
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Ontsmettinator3000/main/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+De identificatie gebeurdt aan de hand van een nfc tag. De id's worden opgemeten en opgeslagen. Deze worden gegeven in een array. De functie hexToString() is nodig om deze in een String te kunnen opslaan.
 
-### Support or Contact
+### Pompen
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Voor het oppompen maken we gebruik van een mini pomp. Eers probeerden we met een servo, maar deze is niet krachtig genoeg. Het gebruik van een nozzle is nodig om de ontsmettingsalcohol te vernevelen.
