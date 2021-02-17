@@ -16,6 +16,10 @@
 - IR beam getest
 
   De beam kan gebruikt worden als voorwerp detector. Hievoor plaatsen we de twee modules naast elkaar. De reflectie zal zorgen voor een geldige meting. De maximale afstand is ongeveer 8cm.
+  
+### Woensdag 16/02
+
+- Ontkoppelen van LED cirquit via high power mosfet en testing. Deze implementatie werkt.
 
 ## Onderdelen
 
