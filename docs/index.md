@@ -19,6 +19,9 @@ Via een slimme ontsmettingsdispenser moet er bijgehouden worden of alle onderzoe
 
 Wanneer elke individuele onderzoeker zijn handen ontsmet heeft is het weer veilig om verder te werken waardoor de andere puzzels terug hervat kunnen worden.
 
+##### Blokschema:
+![Blokschema](blokschema.png)
+
 ## Onderdelen
 
 ### Handdetectie
