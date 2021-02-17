@@ -60,40 +60,63 @@ Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
 
 //IR vars
 uint32_t timeSinceHandDetected = 0;
-uint32_t detectDelay = 100;
+uint32_t detectDelay = 10;
 uint32_t timeSinceDown = 0;
-uint32_t downDelay = 100;
+uint32_t downDelay = 10;
+
+uint32_t lastPump = 0;
+uint32_t pumpDelay = 500;
 
 bool handDetected = false;
+bool busyPomp = false;
 
 void IRAM_ATTR ISRIRfalling();
 void IRAM_ATTR ISRIRrising();
+void pomp();
 
 void IRAM_ATTR ISRIRfalling()
 {
   //Serial.println("falling");
-
   uint32_t time = millis();
-  if (time > timeSinceHandDetected + detectDelay && handDetected)
+  if (time >= timeSinceHandDetected + detectDelay && time >= timeSinceDown + downDelay)
   {
-    timeSinceDown = time;
     handDetected = false;
+    timeSinceDown = time;
+    //digitalWrite(LEDPIN, LOW);
+    attachInterrupt(IRbeam, ISRIRrising, RISING);
   }
-  attachInterrupt(IRbeam, ISRIRrising, RISING);
 }
 
 void IRAM_ATTR ISRIRrising()
 {
   //Serial.println("rising");
   uint32_t time = millis();
-
-  if (time >= timeSinceHandDetected + detectDelay && time >= timeSinceDown + downDelay && !handDetected)
+  if (time >= timeSinceHandDetected + detectDelay && time >= timeSinceDown + downDelay)
   {
-    timeSinceHandDetected = time;
     handDetected = true;
-    Serial.println("Hand detected");
+    timeSinceHandDetected = time;
+    //Serial.println("Hand detected");
+    //digitalWrite(LEDPIN, HIGH);
+    if (lastPump + pumpDelay < time)
+    {
+      busyPomp = true;
+    }
+    attachInterrupt(IRbeam, ISRIRfalling, FALLING);
   }
-  attachInterrupt(IRbeam, ISRIRfalling, FALLING);
+}
+
+void pomp()
+{
+  lastPump = millis();
+  Serial.println("Bezig met pompen");
+  digitalWrite(LEDPIN, HIGH);
+  for (int i = 0; i < 10; i++)
+  {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.println("Pompen klaar");
+  digitalWrite(LEDPIN, LOW);
 }
 
 void setup(void)
@@ -127,6 +150,7 @@ void setup(void)
 
   //IR setup
   pinMode(IRbeam, INPUT_PULLUP);
+  pinMode(LEDPIN, OUTPUT);
   attachInterrupt(IRbeam, ISRIRrising, RISING);
 }
 
@@ -154,6 +178,11 @@ void loop(void)
       }
     }
     irqPrev = irqCurr;
+  }
+  if (busyPomp)
+  {
+    pomp();
+    busyPomp = false;
   }
 }
 
