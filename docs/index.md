@@ -42,7 +42,7 @@ Een RGB led zal een visuele indicatie vormen van de correctheid van de NFC-badge
 Wanneer de vloeistof in de dispenser op dreigt te raken zorgt een water level sensor er voor dat er een melding verstuurd wordt.
 
 
-## Budget (bom)
+## Budget
 
 | Beschrijving  | Aantal        | 
 | :------------- |-------------:|
