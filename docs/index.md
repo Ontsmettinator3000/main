@@ -1,14 +1,24 @@
 # Ontsmetting
 
-[Link naar planning](planning.md)
-- [Ontsmetting](#ontsmetting)
-  - [Onderdelen](#onderdelen)
-    - [Handdetectie](#handdetectie)
-    - [Identificatie](#identificatie)
-    - [Pompen](#pompen)
-    - [RGB Led](#rgb-led)
-    - [Uitbreiding met waterlevelindicator](#uitbreiding-met-waterlevelindicator)
-  
+<!-- no toc -->
+- [Algemene beschrijving](#algemene-beschrijving)
+- [Onderdelen](#onderdelen)
+- [Planning](planning.md)
+- [Budget](#budget-bom)
+- [Vooruitgang](vooruitgang.md)
+- [Risico's](#risicos)
+
+
+
+
+
+## Algemene beschrijving
+
+Zodat de Onderzoekers verder kunnen werken wanneer ze te dicht bij mekaar zijn gekomen moeten ze hun handen ontsmetten. Werk kan dus maar verdergaan wanneer dit gebeurd is.
+Via een slimme ontsmettingsdispenser moet er dus bijgehouden worden of alle onderzoekers hun handen ontsmet hebben en of elke individuele onderzoeker dit gedaan heeft. Dit wordt gedaan via een nfc badge die elke onderzoeker moet scannen om ontsmetting te krijgen. De dispenser werkt volledig zonder fysiek contact aangezien deze via een afstandssensor werkt.
+
+Wanneer elke individuele onderzoeker zijn handen ontsmet heeft is het weer veilig om verder te werken waardoor de andere puzzels terug hervat kunnen worden.
+
 ## Onderdelen
 
 ### Handdetectie
@@ -30,3 +40,28 @@ Een RGB led zal een visuele indicatie vormen van de correctheid van de NFC-badge
 ### Uitbreiding met waterlevelindicator 
 
 Wanneer de vloeistof in de dispenser op dreigt te raken zorgt een water level sensor er voor dat er een melding verstuurd wordt.
+
+
+## Budget (bom)
+
+| Beschrijving  | Aantal        | 
+| :------------- |-------------:|
+| Pomp     | €4 |
+| Buisjes (2m)    | €3      |
+| Led strips | €15      |
+| Audio versterker |    €12    |
+|Speaker| €5|
+|Totaal|€39|
+
+
+## Risico's
+
+#### Fout in pcb
+
+Dit valt op te lossen voor voldoende op voorhand te ontwerpen. Zo hebben we nog marge voor eventuele aanpassingen.
+
+#### Pomp wekt niet met ontsmettingsmiddel
+
+Door veel te testen proberen we zoveel mogelijk fouten uit te sluiten
+
+Zo hebben we elk onderdeel uitvoerig apart getest zoals hievoor beschreven.
