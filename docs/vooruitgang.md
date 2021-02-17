@@ -22,3 +22,5 @@
 ## Woensdag 16/02
 
 - Ontkoppelen van LED cirquit via high power mosfet en testing. Deze implementatie werkt.
+- Verschillende sensoren samengevoegd binnen één programma via interrupts.
+- Onderzoek naar werking alarm.

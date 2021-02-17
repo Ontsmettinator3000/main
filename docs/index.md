@@ -4,7 +4,7 @@
 - [Algemene beschrijving](#algemene-beschrijving)
 - [Onderdelen](#onderdelen)
 - [Planning](planning.md)
-- [Budget](#budget-bom)
+- [Budget](#budget)
 - [Vooruitgang](vooruitgang.md)
 - [Risico's](#risicos)
 
@@ -15,9 +15,12 @@
 ## Algemene beschrijving
 
 Zodat de Onderzoekers verder kunnen werken wanneer ze te dicht bij mekaar zijn gekomen moeten ze hun handen ontsmetten. Werk kan dus maar verdergaan wanneer dit gebeurd is.
-Via een slimme ontsmettingsdispenser moet er dus bijgehouden worden of alle onderzoekers hun handen ontsmet hebben en of elke individuele onderzoeker dit gedaan heeft. Dit wordt gedaan via een nfc badge die elke onderzoeker moet scannen om ontsmetting te krijgen. De dispenser werkt volledig zonder fysiek contact aangezien deze via een afstandssensor werkt.
+Via een slimme ontsmettingsdispenser moet er bijgehouden worden of alle onderzoekers hun handen ontsmet hebben en of elke individuele onderzoeker dit gedaan heeft. Dit wordt gedaan via een nfc badge die elke onderzoeker moet scannen om ontsmetting te krijgen. De dispenser werkt volledig zonder fysiek contact aangezien deze via een afstandssensor werkt.
 
 Wanneer elke individuele onderzoeker zijn handen ontsmet heeft is het weer veilig om verder te werken waardoor de andere puzzels terug hervat kunnen worden.
+
+##### Blokschema:
+![Blokschema](blokschema.png)
 
 ## Onderdelen
 
@@ -42,7 +45,7 @@ Een RGB led zal een visuele indicatie vormen van de correctheid van de NFC-badge
 Wanneer de vloeistof in de dispenser op dreigt te raken zorgt een water level sensor er voor dat er een melding verstuurd wordt.
 
 
-## Budget (bom)
+## Budget
 
 | Beschrijving  | Aantal        | 
 | :------------- |-------------:|
