@@ -1,25 +1,26 @@
 # Ontsmetting
 
-## Vooruitgang
+<!-- no toc -->
+- [Algemene beschrijving](#algemene-beschrijving)
+- [Onderdelen](#onderdelen)
+- [Planning](planning.md)
+- [Budget](#budget)
+- [Vooruitgang](vooruitgang.md)
+- [Risico's](#risicos)
 
-### Vrijdag 12/02
 
-- Servo getest:
 
-  De servo is niet krachtig genoeg om de pomp in te drukken.
-  Gebruik van een pomp of krachtige stappenmotor is nodig.
 
-- Level convertor:
 
-  De Level convertor zet 3.3V om in 5V of omgekeerd. Hiervoor zijn voedingsspanningen van beide levels nodig.
+## Algemene beschrijving
 
-- IR beam getest
+Zodat de Onderzoekers verder kunnen werken wanneer ze te dicht bij mekaar zijn gekomen moeten ze hun handen ontsmetten. Werk kan dus maar verdergaan wanneer dit gebeurd is.
+Via een slimme ontsmettingsdispenser moet er bijgehouden worden of alle onderzoekers hun handen ontsmet hebben en of elke individuele onderzoeker dit gedaan heeft. Dit wordt gedaan via een nfc badge die elke onderzoeker moet scannen om ontsmetting te krijgen. De dispenser werkt volledig zonder fysiek contact aangezien deze via een afstandssensor werkt.
 
-  De beam kan gebruikt worden als voorwerp detector. Hievoor plaatsen we de twee modules naast elkaar. De reflectie zal zorgen voor een geldige meting. De maximale afstand is ongeveer 8cm.
-  
-### Woensdag 16/02
+Wanneer elke individuele onderzoeker zijn handen ontsmet heeft is het weer veilig om verder te werken waardoor de andere puzzels terug hervat kunnen worden.
 
-- Ontkoppelen van LED cirquit via high power mosfet en testing. Deze implementatie werkt.
+##### Blokschema:
+![Blokschema](blokschema.png)
 
 ## Onderdelen
 
@@ -42,3 +43,28 @@ Een RGB led zal een visuele indicatie vormen van de correctheid van de NFC-badge
 ### Uitbreiding met waterlevelindicator 
 
 Wanneer de vloeistof in de dispenser op dreigt te raken zorgt een water level sensor er voor dat er een melding verstuurd wordt.
+
+
+## Budget
+
+| Beschrijving  | Aantal        | 
+| :------------- |-------------:|
+| Pomp     | €4 |
+| Buisjes (2m)    | €3      |
+| Led strips | €15      |
+| Audio versterker |    €12    |
+|Speaker| €5|
+|Totaal|€39|
+
+
+## Risico's
+
+#### Fout in pcb
+
+Dit valt op te lossen voor voldoende op voorhand te ontwerpen. Zo hebben we nog marge voor eventuele aanpassingen.
+
+#### Pomp wekt niet met ontsmettingsmiddel
+
+Door veel te testen proberen we zoveel mogelijk fouten uit te sluiten
+
+Zo hebben we elk onderdeel uitvoerig apart getest zoals hievoor beschreven.
