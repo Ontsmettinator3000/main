@@ -26,9 +26,15 @@ LED pins:
 #include <vector>
 #include <algorithm>
 
+
+#include <Login.h>
+
 //NFC funtcties
 static void startListeningToNFC();
 static String handleCardDetected();
+bool cardDetected = false;
+long timeSinceCardDetected = 0;
+long cardDetectDelay = 2000;
 
 // Pins used for I2C IRQ
 #define PN532_IRQ 4
@@ -41,6 +47,9 @@ static String handleCardDetected();
 #define LEDPIN 2
 
 // NFC vars
+Login login;
+
+//boolean validate(String currentId);
 const int DELAY_BETWEEN_CARDS = 500;
 long timeLastCardRead = 0;
 boolean readerDisabled = false;
@@ -83,7 +92,9 @@ void IRAM_ATTR ISRIRfalling()
     handDetected = false;
     timeSinceDown = time;
     //digitalWrite(LEDPIN, LOW);
+    if(cardDetected){
     attachInterrupt(IRbeam, ISRIRrising, RISING);
+    }
   }
 }
 
@@ -101,7 +112,9 @@ void IRAM_ATTR ISRIRrising()
     {
       busyPomp = true;
     }
+    if(cardDetected){
     attachInterrupt(IRbeam, ISRIRfalling, FALLING);
+    }
   }
 }
 
@@ -151,11 +164,13 @@ void setup(void)
   //IR setup
   pinMode(IRbeam, INPUT_PULLUP);
   pinMode(LEDPIN, OUTPUT);
-  attachInterrupt(IRbeam, ISRIRrising, RISING);
 }
 
 void loop(void)
 {
+  if(timeSinceCardDetected + cardDetectDelay < millis()){
+    cardDetected = true;
+  }
   if (readerDisabled)
   {
     if (millis() - timeLastCardRead > DELAY_BETWEEN_CARDS)
@@ -171,16 +186,20 @@ void loop(void)
     if (irqCurr == LOW && irqPrev == HIGH)
     {
       //Serial.println("Got NFC IRQ");
+      cardDetected = true;
+      timeSinceCardDetected = millis();
       String id = handleCardDetected();
-      if (registeringCards)
-      {
-        registerCard(id);
+      //Serial.println(id);
+      if(login.validate(id)){
+        Serial.println("valid tag");
+        attachInterrupt(IRbeam, ISRIRrising, RISING);
       }
     }
     irqPrev = irqCurr;
   }
   if (busyPomp)
   {
+    detachInterrupt(IRbeam);
     pomp();
     busyPomp = false;
   }
@@ -195,50 +214,18 @@ void startListeningToNFC()
   nfc.startPassiveTargetIDDetection(PN532_MIFARE_ISO14443A);
 }
 
-boolean validate(uint8_t *cardid, uint8_t length)
+/*boolean validate(String currentId)
 {
-  std::stringstream ss;
-  for (int i = 0; i < length - 1; ++i)
+  String *ids = tags();
+  for (int i = 0; i < 2; i++)
   {
-    ss << "0x";
-    if ((int)cardid[i] <= 15)
-    {
-      ss << "0";
-    }
-    ss << std::hex << (int)cardid[i];
-    ss << " ";
-  }
-  ss << "0x";
-  if ((int)cardid[length - 1] <= 15)
-  {
-    ss << "0";
-  }
-  ss << std::hex << (int)cardid[length - 1];
-  std::string mystrC = ss.str();
-  String mystr = mystrC.c_str();
-  mystr.toUpperCase();
-  mystrC = mystr.c_str();
-  Serial.print("Onze hex: ");
-  Serial.println(mystr.c_str());
-
-  std::string waarde[] = {"0X02 0X82 0X00 0X08 0X7B 0X2B 0XC3",
-                          "0X04 0X9C 0X49 0X6A 0X99 0X5B 0X80",
-                          "0X69 0X42 0XA2 0XB8",
-                          "0XB3 0XF7 0XC6 0X02",
-                          "0X04 0X6B 0X0F 0XE2 0X50 0X5A 0X80",
-                          "0XA9 0XAF 0XAE 0XC2",
-                          "0X04 0X07 0XCC 0X52 0XA8 0X58 0X81"};
-  for (int i = 0; i < 7; i++)
-  {
-    Serial.println(waarde[i].c_str());
-    Serial.println(mystrC.c_str());
-    if (waarde[i].compare(mystrC) == 0)
+    if (ids[i].compareTo(currentId)==0)
     {
       return true;
     }
   }
   return false;
-}
+}*/
 
 String hexToString(uint8_t *cardid)
 {
