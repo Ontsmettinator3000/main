@@ -2,6 +2,7 @@
 - [Vooruitgang](#vooruitgang)
   - [Vrijdag 12/02](#vrijdag-1202)
   - [Woensdag 17/02](#woensdag-1702)
+  - [Donderdag 18/02](#donderdag-1802)
   - [Vrijdag 19/02](#vrijdag-1902)
 
 
@@ -26,6 +27,11 @@
 - Verschillende sensoren samengevoegd binnen één programma via interrupts.
 - Onderzoek naar werking alarm.
 
+## Donderdag 18/02
+
+- Opdeling van code in verschillende klasses
+
 ## Vrijdag 19/02
 
-- testen van LCD scherm die aantal mensen die ontsmt hebben weergeeft
+- Testen van LCD scherm dat aantal mensen die ontsmet hebben weergeeft
+- Toevoeging van config en validTag bestanden aan code
