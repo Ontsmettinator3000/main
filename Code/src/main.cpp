@@ -6,10 +6,12 @@
 #include "NFC.h"
 #include "IRSensor.h"
 #include "config.h"
+#include "LCD.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
+LCD scherm;
 
 //IR IRS
 void IRAM_ATTR ISRIRfalling();
@@ -36,10 +38,12 @@ void IRAM_ATTR ISRIRrising()
   if (nfcHandler.cardDetected)
   {
     attachInterrupt(IRbeam, ISRIRfalling, FALLING);
+   
   }
   if (lastPump + pumpDelay < millis())
   {
     busyPomp = true;
+    scherm.update();        //Deze update het lcd scherm over hoeveel mensen ontsmet zijn, moet op correcte plek gezet worden
   }
 }
 
@@ -66,6 +70,8 @@ void setup(void)
 
   //IR setup
   handDetector.setup();
+
+  scherm.setup();
 }
 
 void loop(void)

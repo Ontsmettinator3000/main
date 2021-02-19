@@ -23,6 +23,7 @@ LED pins:
 #define CONFIG_H
 
 #include "Arduino.h"
+#include <LiquidCrystal.h>
 
 ///IR beam
 #define IRbeam 18
@@ -39,5 +40,12 @@ LED pins:
 #define DELAY_BETWEEN_CARDS 500
 
 ///Login
+
+///LCD scherm
+
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 6;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);                  //Deze defined de lcd pinnen al denk ik
+
+
 
 #endif /*CONFIG_H*/
