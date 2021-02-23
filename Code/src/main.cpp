@@ -7,11 +7,13 @@
 #include "IRSensor.h"
 #include "config.h"
 #include "LCD.h"
+#include "MQTT.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
 LCD scherm;
+MQTT mqtt;
 
 //IR IRS
 void IRAM_ATTR ISRIRfalling();
@@ -28,7 +30,7 @@ void IRAM_ATTR ISRIRfalling()
   handDetector.fallingIR();
   if (nfcHandler.cardDetected)
   {
-    attachInterrupt(IRbeam, ISRIRrising, RISING);
+    attachInterrupt(digitalPinToInterrupt(IRbeam), ISRIRrising, RISING);
   }
 }
 
@@ -37,13 +39,12 @@ void IRAM_ATTR ISRIRrising()
   handDetector.risingIR();
   if (nfcHandler.cardDetected)
   {
-    attachInterrupt(IRbeam, ISRIRfalling, FALLING);
-   
+    attachInterrupt(digitalPinToInterrupt(IRbeam), ISRIRfalling, FALLING);
   }
   if (lastPump + pumpDelay < millis())
   {
     busyPomp = true;
-    scherm.update();        //Deze update het lcd scherm over hoeveel mensen ontsmet zijn, moet op correcte plek gezet worden
+    scherm.update(); //Deze update het lcd scherm over hoeveel mensen ontsmet zijn, moet op correcte plek gezet worden
   }
 }
 
