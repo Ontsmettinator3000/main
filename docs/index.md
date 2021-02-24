@@ -4,7 +4,7 @@
 - [Algemene beschrijving](#algemene-beschrijving)
 - [Onderdelen](#onderdelen)
 - [Planning](planning.md)
-- [BOM](#BOM)
+- [BOM](#bom)
 - [Vooruitgang](vooruitgang.md)
 - [Risico's](#risicos)
 
