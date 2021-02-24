@@ -16,3 +16,24 @@ boolean Login::validate(String currentId)
   }
   return false;
 }
+
+boolean Login::login(String currentId)
+{
+  if (validate(currentId))
+  {
+    if (std::find(scannedIDS.begin(), scannedIDS.end(), currentId) != scannedIDS.end())
+    {
+      scannedIDS.push_back(currentId);
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  };
+}
+
+int Login::getUserCount()
+{
+  return scannedIDS.size();
+}

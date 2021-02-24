@@ -25,6 +25,8 @@ LED pins:
 #include "Arduino.h"
 #include <LiquidCrystal.h>
 
+#define playerCount 4
+
 ///IR beam
 #define IRbeam 18
 #define LEDPIN 2
@@ -52,10 +54,10 @@ LED pins:
 //LiquidCrystal lcd(rs, en, d4, d5, d6, d7);                  //Deze defined de lcd pinnen al denk ik
 
 ///MQTT
-#define SSID "Techtile"
-#define PWD "Techtile229"
+//#define SSID "NETGEAR68"
+//#define PWD "excitedtuba713"
 
-#define MQTT_SERVER "10.128.48.25"
-#define MQTT_PORT 1883
+//define MQTT_SERVER "192.168.1.2"
+//#define MQTT_PORT 1883
 
 #endif /*CONFIG_H*/

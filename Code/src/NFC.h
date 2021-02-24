@@ -25,5 +25,8 @@ public:
     String handleCardDetected();
     String hexToString(uint8_t *cardid);
     String getCardDetected();
+    bool enabled = false;
+    void enable();
+    void disable();
 };
 #endif

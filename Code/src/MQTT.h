@@ -6,9 +6,15 @@
 #include "PubSubClient.h"
 
 #include "config.h"
+#define SSID "NETGEAR68"
+#define PWD "excitedtuba713"
+
+#define MQTT_SERVER "192.168.1.2"
+#define MQTT_PORT 1883
 
 class MQTT
 {
+
 private:
     WiFiClient espClient;
     PubSubClient client;
@@ -18,10 +24,17 @@ private:
 
 public:
     MQTT();
+    uint8_t lastSignal;
+    uint8_t currentSignal;
+    uint8_t lastval;
     void setup();
     void setupWifi();
-    //void callback(char *topic, byte *message, unsigned int length);
     void reconnect();
+    //void callback(char *topic, byte *message, unsigned int length);
+    uint8_t getCurrentSignal();
+    uint8_t getLastSignal();
+    void setOK();
+    void loop();
 };
 
 #endif

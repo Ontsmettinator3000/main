@@ -142,3 +142,13 @@ String NFC::getCardDetected()
         return id;
     }
 }
+
+void NFC::enable()
+{
+    enabled = true;
+}
+
+void NFC::disable()
+{
+    enabled = false;
+}

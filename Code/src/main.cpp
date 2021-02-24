@@ -7,13 +7,13 @@
 #include "IRSensor.h"
 #include "config.h"
 #include "LCD.h"
-#include "MQTT.h"
+//#include "MQTT.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
 LCD scherm;
-MQTT mqtt;
+//MQTT mqtt;
 
 //IR IRS
 void IRAM_ATTR ISRIRfalling();
@@ -36,16 +36,9 @@ void IRAM_ATTR ISRIRfalling()
 
 void IRAM_ATTR ISRIRrising()
 {
-  handDetector.risingIR();
-  if (nfcHandler.cardDetected)
-  {
-    attachInterrupt(digitalPinToInterrupt(IRbeam), ISRIRfalling, FALLING);
-  }
-  if (lastPump + pumpDelay < millis())
-  {
-    busyPomp = true;
-    scherm.update(); //Deze update het lcd scherm over hoeveel mensen ontsmet zijn, moet op correcte plek gezet worden
-  }
+  //handDetector.risingIR();
+  busyPomp = true;
+  detachInterrupt(digitalPinToInterrupt(IRbeam));
 }
 
 void pomp()
@@ -73,30 +66,46 @@ void setup(void)
   handDetector.setup();
 
   scherm.setup();
+  nfcHandler.enable();
 }
 
 void loop(void)
 {
-  /*if (timeSinceCardDetected + cardDetectDelay < millis())
+  //signaal lezen van broker
+  /*if (mqtt.getCurrentSignal() == 1 && mqtt.lastval != mqtt.getCurrentSignal())
   {
-    cardDetected = true;
-  }*/
+    mqtt.lastval = 1;
+    nfcHandler.enable();
+  }
+*/
+  //signaal lezen van nfc indien signaal ontvangen
 
-  String id = nfcHandler.getCardDetected();
-  if (id != "DISABLED")
+  if (nfcHandler.enabled)
   {
-    if (login.validate(id))
+    String id = nfcHandler.getCardDetected();
+    if (id != "DISABLED")
     {
-      Serial.println("valid tag");
-      handDetector.enable();
+      if (login.login(id))
+      {
+        Serial.println("valid tag");
+        nfcHandler.disable();
+        handDetector.enable();
+        attachInterrupt(digitalPinToInterrupt(IRbeam), ISRIRrising, RISING);
+      }
     }
   }
-
   if (busyPomp)
   {
-    detachInterrupt(digitalPinToInterrupt(IRbeam));
     pomp();
     busyPomp = false;
-    handDetector.disable();
+    if (login.getUserCount() >= playerCount)
+    {
+      //mqtt.setOK();
+      Serial.println("iedereen ontsmet");
+    }
+    else
+    {
+      nfcHandler.enable();
+    }
   }
 }

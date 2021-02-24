@@ -4,13 +4,42 @@ MQTT::MQTT()
 {
     WiFiClient espClient;
     PubSubClient client(espClient);
+    //String MQTT::lastSignal = "ALARM";
+}
+
+void callback(char *topic, byte *message, unsigned int length, uint8_t *lastvalue)
+{
+    Serial.print("Message arrived on topic: ");
+    Serial.print(topic);
+    Serial.print(". Message: ");
+    String messageTemp;
+
+    for (int i = 0; i < length; i++)
+    {
+        Serial.print((char)message[i]);
+        messageTemp += (char)message[i];
+    }
+    Serial.println();
+
+    // Feel free to add more if statements to control more GPIOs with MQTT
+
+    // If a message is received on the topic esp32/output, you check if the message is either "on" or "off".
+    // Changes the output state according to the message
+    if (String(topic) == "esp32/ontsmetten/control")
+    {
+        if (messageTemp == "ALARM")
+        {
+            *lastvalue = 1;
+            digitalWrite(LEDPIN, HIGH);
+        }
+    }
 }
 
 void MQTT::setup()
 {
     setupWifi();
     client.setServer(MQTT_SERVER, MQTT_PORT);
-    client.setCallback(callback);
+    client.setCallback(callback, &this->lastval);
 }
 
 void MQTT::setupWifi()
@@ -33,43 +62,25 @@ void MQTT::setupWifi()
     Serial.println(WiFi.localIP());
 }
 
-void callback(char *topic, byte *message, unsigned int length)
+void MQTT::loop()
 {
-    Serial.print("Message arrived on topic: ");
-    Serial.print(topic);
-    Serial.print(". Message: ");
-    String messageTemp;
-
-    for (int i = 0; i < length; i++)
+    if (!client.connected())
     {
-        Serial.print((char)message[i]);
-        messageTemp += (char)message[i];
+        reconnect();
     }
-    Serial.println();
+    client.loop();
 
-    // Feel free to add more if statements to control more GPIOs with MQTT
-
-    // If a message is received on the topic esp32/output, you check if the message is either "on" or "off".
-    // Changes the output state according to the message
-    if (String(topic) == "esp32/output")
+    long now = millis();
+    if (now - lastMsg > 5000)
     {
-        Serial.print("Changing output to ");
-        if (messageTemp == "on")
-        {
-            Serial.println("on");
-            digitalWrite(LEDPIN, HIGH);
-        }
-        else if (messageTemp == "off")
-        {
-            Serial.println("off");
-            digitalWrite(LEDPIN, LOW);
-        }
+        lastMsg = now;
     }
 }
 
 void MQTT::reconnect()
 {
     // Loop until we're reconnected
+
     while (!client.connected())
     {
         Serial.print("Attempting MQTT connection...");
@@ -89,4 +100,19 @@ void MQTT::reconnect()
             delay(5000);
         }
     }
+}
+
+uint8_t MQTT::getCurrentSignal()
+{
+    return currentSignal;
+}
+
+uint8_t MQTT::getLastSignal()
+{
+    return lastval;
+}
+
+void MQTT::setOK()
+{
+    client.publish("esp32/output", "OK");
 }
