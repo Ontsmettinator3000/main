@@ -124,6 +124,7 @@ String NFC::getCardDetected()
         }
         String disabled = "DISABLED";
         return disabled;
+        
     }
     else
     {

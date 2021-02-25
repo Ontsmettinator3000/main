@@ -28,11 +28,10 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
     //als er een berich binnen komt alarm, zal het current signaal op alarm gezet worden
     if (String(topic) == "esp32/ontsmetten/control")
     {
-        if (messageTemp == "ALARM")
-        {
-            currentSignal = "ALARM";
-            digitalWrite(LEDPIN, HIGH);
-        }
+       
+     currentSignal = messageTemp;
+           
+        
     }
 }
 

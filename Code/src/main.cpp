@@ -59,10 +59,10 @@ void setup(void)
 {
 
   Serial.begin(115200);
-
+  Serial.println("setuping");
   //MQTT setup
   mqtt.setup();
-
+  
   //nfc setup
   nfcHandler.setup();
 
@@ -70,7 +70,7 @@ void setup(void)
   handDetector.setup();
 
   //scherm.setup();
-  nfcHandler.enable();
+  nfcHandler.disable();
 }
 
 void loop(void)
@@ -83,18 +83,17 @@ void loop(void)
     //er is een aanpassing
     if (mqtt.getCurrentSignal() == "ALARM")
     {
-      mqtt.lastSignal = "ALARM";
       Serial.println("Alarm ontvangen");
       nfcHandler.enable();
-      delay(2000);
-      mqtt.setOK();
     }
+    mqtt.lastSignal=mqtt.currentSignal;
   }
 
   //signaal lezen van nfc indien signaal ontvangen
 
   if (nfcHandler.enabled)
   {
+    //Serial.println("enabled");
     String id = nfcHandler.getCardDetected();
     if (id != "DISABLED")
     {

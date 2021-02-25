@@ -55,8 +55,8 @@ LED pins:
 
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
-#define SSID_C "NETGEAR68"
-#define PWD_C "excitedtuba713"
+#define SSID_C "Proximus-Home-5210"
+#define PWD_C "wecxmu3js3azf"
 #define MQTT_SERVER "broker.hivemq.com"
 //#define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883
