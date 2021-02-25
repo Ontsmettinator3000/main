@@ -2,8 +2,6 @@
 
 MQTT::MQTT()
 {
-    WiFiClient espClient;
-    PubSubClient client(espClient);
     //String MQTT::lastSignal = "ALARM";
 }
 

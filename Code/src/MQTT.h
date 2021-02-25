@@ -12,13 +12,14 @@
 #define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883
 
+static WiFiClient espClient;
+static PubSubClient client(espClient);
+
 class MQTT
 {
 
 private:
-    WiFiClient espClient;
-    PubSubClient client;
-    long lastMsg = 0;
+        long lastMsg = 0;
     char msg[50];
     int value = 0;
 

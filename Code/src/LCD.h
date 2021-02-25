@@ -10,7 +10,6 @@ private:
     int count = 0;
 
 public:
-    LCD();
     void setup();
     void update();
 };
