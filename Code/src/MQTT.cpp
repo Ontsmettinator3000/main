@@ -7,7 +7,7 @@ MQTT::MQTT()
     //String MQTT::lastSignal = "ALARM";
 }
 
-void callback(char *topic, byte *message, unsigned int length, uint8_t *lastvalue)
+void MQTT::callback(char *topic, byte *message, unsigned int length)
 {
     Serial.print("Message arrived on topic: ");
     Serial.print(topic);
@@ -29,7 +29,7 @@ void callback(char *topic, byte *message, unsigned int length, uint8_t *lastvalu
     {
         if (messageTemp == "ALARM")
         {
-            *lastvalue = 1;
+            lastSignal = "ALARM";
             digitalWrite(LEDPIN, HIGH);
         }
     }
@@ -39,7 +39,10 @@ void MQTT::setup()
 {
     setupWifi();
     client.setServer(MQTT_SERVER, MQTT_PORT);
-    client.setCallback(callback, &this->lastval);
+    using std::placeholders::_1;
+    using std::placeholders::_2;
+    using std::placeholders::_3;
+    client.setCallback(std::bind(&MQTT::callback, this, _1, _2, _3));
 }
 
 void MQTT::setupWifi()
@@ -102,14 +105,14 @@ void MQTT::reconnect()
     }
 }
 
-uint8_t MQTT::getCurrentSignal()
+String MQTT::getCurrentSignal()
 {
     return currentSignal;
 }
 
-uint8_t MQTT::getLastSignal()
+String MQTT::getLastSignal()
 {
-    return lastval;
+    return lastSignal;
 }
 
 void MQTT::setOK()

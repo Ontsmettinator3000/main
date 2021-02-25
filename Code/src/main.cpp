@@ -7,13 +7,13 @@
 #include "IRSensor.h"
 #include "config.h"
 #include "LCD.h"
-//#include "MQTT.h"
+#include "MQTT.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
 LCD scherm;
-//MQTT mqtt;
+MQTT mqtt;
 
 //IR IRS
 void IRAM_ATTR ISRIRfalling();

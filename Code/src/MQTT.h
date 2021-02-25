@@ -24,15 +24,17 @@ private:
 
 public:
     MQTT();
-    uint8_t lastSignal;
-    uint8_t currentSignal;
-    uint8_t lastval;
+    //uint8_t lastSignal;
+    //uint8_t currentSignal;
+    //uint8_t lastval;
+    String lastSignal;
+    String currentSignal;
     void setup();
     void setupWifi();
     void reconnect();
-    //void callback(char *topic, byte *message, unsigned int length);
-    uint8_t getCurrentSignal();
-    uint8_t getLastSignal();
+    void callback(char *topic, byte *message, unsigned int length);
+    String getCurrentSignal();
+    String getLastSignal();
     void setOK();
     void loop();
 };
