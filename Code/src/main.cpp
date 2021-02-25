@@ -6,13 +6,13 @@
 #include "NFC.h"
 #include "IRSensor.h"
 #include "config.h"
-#include "LCD.h"
+//#include "LCD.h"
 #include "MQTT.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
-LCD scherm;
+//LCD scherm;
 MQTT mqtt;
 
 //IR IRS
@@ -57,27 +57,40 @@ void pomp()
 
 void setup(void)
 {
+
   Serial.begin(115200);
 
-  ///nfc setup
+  //MQTT setup
+  mqtt.setup();
+
+  //nfc setup
   nfcHandler.setup();
 
   //IR setup
   handDetector.setup();
 
-  scherm.setup();
+  //scherm.setup();
   nfcHandler.enable();
 }
 
 void loop(void)
 {
   //signaal lezen van broker
-  /*if (mqtt.getCurrentSignal() == 1 && mqtt.lastval != mqtt.getCurrentSignal())
+  mqtt.loop();
+
+  if (mqtt.lastSignal != mqtt.getCurrentSignal())
   {
-    mqtt.lastval = 1;
-    nfcHandler.enable();
+    //er is een aanpassing
+    if (mqtt.getCurrentSignal() == "ALARM")
+    {
+      mqtt.lastSignal = "ALARM";
+      Serial.println("Alarm ontvangen");
+      nfcHandler.enable();
+      delay(2000);
+      mqtt.setOK();
+    }
   }
-*/
+
   //signaal lezen van nfc indien signaal ontvangen
 
   if (nfcHandler.enabled)
@@ -94,13 +107,14 @@ void loop(void)
       }
     }
   }
+  //busy pomp zal true zijn als er moet gepompt worden (wordt true gezet door ir beam)
   if (busyPomp)
   {
     pomp();
     busyPomp = false;
     if (login.getUserCount() >= playerCount)
     {
-      //mqtt.setOK();
+      mqtt.setOK(); //de rest van de puzzels laten weten dat iedereen ontsmet is
       Serial.println("iedereen ontsmet");
     }
     else

@@ -2,11 +2,13 @@
 
 MQTT::MQTT()
 {
-    //String MQTT::lastSignal = "ALARM";
+    //constructor
 }
 
 void MQTT::callback(char *topic, byte *message, unsigned int length)
 {
+    //deze methode wordt opgeroepen als er bericht is
+    //merk op dat deze methode behoort tot MQTT, een conversie is nodig want de library wilt enkel std callbacks (geen MQTT)
     Serial.print("Message arrived on topic: ");
     Serial.print(topic);
     Serial.print(". Message: ");
@@ -23,11 +25,12 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
 
     // If a message is received on the topic esp32/output, you check if the message is either "on" or "off".
     // Changes the output state according to the message
+    //als er een berich binnen komt alarm, zal het current signaal op alarm gezet worden
     if (String(topic) == "esp32/ontsmetten/control")
     {
         if (messageTemp == "ALARM")
         {
-            lastSignal = "ALARM";
+            currentSignal = "ALARM";
             digitalWrite(LEDPIN, HIGH);
         }
     }
@@ -35,6 +38,7 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
 
 void MQTT::setup()
 {
+    Serial.println("MQTT setup");
     setupWifi();
     client.setServer(MQTT_SERVER, MQTT_PORT);
     using std::placeholders::_1;
@@ -49,7 +53,7 @@ void MQTT::setupWifi()
     delay(10);
     Serial.println("Connecting to WiFi..");
 
-    WiFi.begin(SSID, PWD);
+    WiFi.begin(SSID_C, PWD_C);
 
     while (WiFi.status() != WL_CONNECTED)
     {
@@ -65,8 +69,10 @@ void MQTT::setupWifi()
 
 void MQTT::loop()
 {
+    //Serial.println("looping");
     if (!client.connected())
     {
+        Serial.println("reconnecting");
         reconnect();
     }
     client.loop();
@@ -86,11 +92,11 @@ void MQTT::reconnect()
     {
         Serial.print("Attempting MQTT connection...");
         // Attempt to connect
-        if (client.connect("ESP8266Client"))
+        if (client.connect("ESP32clientIBE69"))
         {
             Serial.println("connected");
             // Subscribe
-            client.subscribe("esp32/output");
+            client.subscribe("esp32/ontsmetten/control");
         }
         else
         {
@@ -115,5 +121,5 @@ String MQTT::getLastSignal()
 
 void MQTT::setOK()
 {
-    client.publish("esp32/output", "OK");
+    client.publish("esp32/ontsmetten/control", "OK");
 }

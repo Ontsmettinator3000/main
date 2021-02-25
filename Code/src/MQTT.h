@@ -6,38 +6,37 @@
 #include "PubSubClient.h"
 
 #include "config.h"
-#define SSID "NETGEAR68"
-#define PWD "excitedtuba713"
 
-#define MQTT_SERVER "192.168.1.2"
-#define MQTT_PORT 1883
+//vars kunnen toch uit config gehaald worden
 
-static WiFiClient espClient;
-static PubSubClient client(espClient);
+//#define SSID "NETGEAR68"
+//#define PWD "excitedtuba713"
+//#define MQTT_SERVER "192.168.1.2"
+//#define MQTT_PORT 1883
+
+static WiFiClient espClient;           //wifi verbing object
+static PubSubClient client(espClient); //mqtt handler object
 
 class MQTT
 {
 
 private:
-        long lastMsg = 0;
+    long lastMsg = 0;
     char msg[50];
     int value = 0;
 
 public:
     MQTT();
-    //uint8_t lastSignal;
-    //uint8_t currentSignal;
-    //uint8_t lastval;
-    String lastSignal;
-    String currentSignal;
-    void setup();
-    void setupWifi();
+    String lastSignal;    //laatste signaal dat binnen gekomen is
+    String currentSignal; //signaal dat momenteel binnen gekomen is
+    void setup();         //algemen setup van de klasse
+    void setupWifi();     //wifi verbinding setup
     void reconnect();
-    void callback(char *topic, byte *message, unsigned int length);
+    void callback(char *topic, byte *message, unsigned int length); //deze methode wordt opgeroepen als er een bericht binne komt via mqtt
     String getCurrentSignal();
     String getLastSignal();
-    void setOK();
-    void loop();
+    void setOK(); //deze methode zal een ok bericht versturen naar de broken
+    void loop();  //ik weet niet zo goed wat dit doet
 };
 
 #endif

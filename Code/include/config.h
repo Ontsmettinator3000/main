@@ -23,7 +23,7 @@ LED pins:
 #define CONFIG_H
 
 #include "Arduino.h"
-#include <LiquidCrystal.h>
+//#include <LiquidCrystal.h>
 
 #define playerCount 4
 
@@ -44,20 +44,21 @@ LED pins:
 ///Login
 
 ///LCD scherm
-#define rs 12
+/*#define rs 12
 #define en 11
 #define d4 5
 #define d5 4
 #define d6 3
-#define d7 6
-//const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 6;
+#define d7 6*/
+//
 //LiquidCrystal lcd(rs, en, d4, d5, d6, d7);                  //Deze defined de lcd pinnen al denk ik
 
 ///MQTT
-//#define SSID "NETGEAR68"
-//#define PWD "excitedtuba713"
-
-//define MQTT_SERVER "192.168.1.2"
-//#define MQTT_PORT 1883
+//_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
+#define SSID_C "NETGEAR68"
+#define PWD_C "excitedtuba713"
+#define MQTT_SERVER "broker.hivemq.com"
+//#define MQTT_SERVER "192.168.1.2"
+#define MQTT_PORT 1883
 
 #endif /*CONFIG_H*/
