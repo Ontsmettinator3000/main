@@ -4,7 +4,7 @@
 - [Algemene beschrijving](#algemene-beschrijving)
 - [Onderdelen](#onderdelen)
 - [Planning](planning.md)
-- [Budget](#budget)
+- [BOM](#bom)
 - [Vooruitgang](vooruitgang.md)
 - [Risico's](#risicos)
 
@@ -49,16 +49,21 @@ Een RGB led zal een visuele indicatie vormen van de correctheid van de NFC-badge
 Wanneer de vloeistof in de dispenser op dreigt te raken zorgt een water level sensor er voor dat er een melding verstuurd wordt.
 
 
-## Budget
+## BOM
 
-| Beschrijving  | Aantal        | 
-| :------------- |-------------:|
-| Pomp     | €4 |
-| Buisjes (2m)    | €3      |
-| Led strips | €15      |
-| Audio versterker |    €12    |
-|Speaker| €5|
-|Totaal|€39|
+| In bezit | Beschrijving  | Aantal        | Link |
+| --- | :------------- |-------------:| :------------- |
+| :white_check_mark: | Pomp     | 1 | https://www.tinytronics.nl/shop/nl/robotica/motoren/motor/onderwaterpomp-verticaal-3-6v |
+| :white_check_mark: | Buisjes 1m | 2 | https://www.tinytronics.nl/shop/nl/robotica/toebehoren/waterslang-voor-onderwaterpomp-verticaal-horizontaal-3-6v-transparant-1-meter |
+| :white_check_mark: | ESP32 devkit | 1 |  |
+| :white_check_mark: | NFC tag      | 5 |  |
+| :white_check_mark: | NFC lees module | 1 |  |
+|  | Audio versterker 3W (momenteel één van school) |    1    |  |
+|  | Speaker (1.5W, 15 Ohm) | 2 |  |
+| :white_check_mark: | High power mosfet | 3 | https://www.tinytronics.nl/shop/nl/arduino/accessoires/high-power-mosfet-module-5-36v-15a |
+|  | Indicatie leds (rood & groen) | 2 |  |
+|  | LCD scherm om aantal personen weer te geven | 1 |  |
+|  | Voeding (5V batterij) | 1 |  |
 
 
 ## Risico's
