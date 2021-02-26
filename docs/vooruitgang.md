@@ -35,3 +35,14 @@
 
 - Testen van LCD scherm dat aantal mensen die ontsmet hebben weergeeft
 - Toevoeging van config en validTag bestanden aan code
+
+## Woensdag 24/02
+
+- Testen werking pomp
+- Toevoegen mqtt
+- Samenvoegen alle aparte componenten binnen 1 bestand (lcd zorgde voor memory leak)
+
+## Vrijdag 26/02
+
+- mqtt last will toegevoegd (hhhhhelp, ik peis dak een probleem eb)
+- werking lcd herstellen (werkt maar problemen met signalen ofzo)
