@@ -23,7 +23,7 @@ LED pins:
 #define CONFIG_H
 
 #include "Arduino.h"
-//#include <LiquidCrystal.h>
+#include <LiquidCrystal.h>
 
 #define playerCount 2
 
@@ -44,19 +44,21 @@ LED pins:
 ///Login
 
 ///LCD scherm
-/*#define rs 12
-#define en 11
-#define d4 5
-#define d5 4
-#define d6 3
-#define d7 6*/
+#define rs 19 
+#define en 32
+#define d4 33
+#define d5 25
+#define d6 26
+#define d7 27
 //
 //LiquidCrystal lcd(rs, en, d4, d5, d6, d7);                  //Deze defined de lcd pinnen al denk ik
 
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
-#define SSID_C "wie dit leest is dom"
-#define PWD_C "stefissexy"
+//#define SSID_C "wie dit leest is dom"
+#define SSID_C "Proximus-Home-5210"
+//#define PWD_C "stefissexy"
+#define PWD_C "wecxmu3js3azf"
 #define MQTT_SERVER "broker.hivemq.com"
 //#define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883

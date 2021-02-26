@@ -38,3 +38,8 @@ int Login::getUserCount()
 {
   return scannedIDS.size();
 }
+
+void Login::reset()
+{
+  scannedIDS.clear();
+}
