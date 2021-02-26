@@ -114,39 +114,49 @@ String NFC::hexToString(uint8_t *cardid)
 
 String NFC::getCardDetected()
 {
-    if (readerDisabled)
-    {
+    if (enabled) //deze enabled zal door ons aan en uit gezet worden (dit geeft aan of we gaan registreren ofniet)
 
-        if (millis() - timeLastCardRead > DELAY_BETWEEN_CARDS)
+    {
+        if (readerDisabled) //deze enabled zal door de library geschakeld worden (zorgt voor een delay tussen 2 scans)
         {
-            readerDisabled = false;
-            startListeningToNFC();
+
+            if (millis() - timeLastCardRead > DELAY_BETWEEN_CARDS)
+            {
+                readerDisabled = false;
+                startListeningToNFC();
+            }
+            String disabled = "DISABLED";
+            return disabled;
         }
-        String disabled = "DISABLED";
-        return disabled;
-        
+        else
+        {
+            irqCurr = digitalRead(PN532_IRQ);
+            String id;
+            // When the IRQ is pulled low - the reader has got something for us.
+            if (irqCurr == LOW && irqPrev == HIGH)
+            {
+                //Serial.println("Got NFC IRQ");
+                cardDetected = true;
+                timeSinceCardDetected = millis();
+                id = handleCardDetected();
+                //Serial.println(id);
+            }
+            irqPrev = irqCurr;
+            return id;
+        }
     }
     else
     {
-        irqCurr = digitalRead(PN532_IRQ);
-        String id;
-        // When the IRQ is pulled low - the reader has got something for us.
-        if (irqCurr == LOW && irqPrev == HIGH)
-        {
-            //Serial.println("Got NFC IRQ");
-            cardDetected = true;
-            timeSinceCardDetected = millis();
-            id = handleCardDetected();
-            //Serial.println(id);
-        }
-        irqPrev = irqCurr;
-        return id;
+        String disabled = "DISABLED";
+        return disabled;
     }
 }
 
 void NFC::enable()
 {
     enabled = true;
+    readerDisabled = false;
+    startListeningToNFC();
 }
 
 void NFC::disable()
