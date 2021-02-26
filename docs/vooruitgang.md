@@ -4,7 +4,8 @@
   - [Woensdag 17/02](#woensdag-1702)
   - [Donderdag 18/02](#donderdag-1802)
   - [Vrijdag 19/02](#vrijdag-1902)
-
+  - [Woensdag 24/02](#woensdag-2402)
+  - [Vrijdag 26/02](#vrijdag-2602)
 
 ## Vrijdag 12/02
 
