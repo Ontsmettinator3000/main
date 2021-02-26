@@ -25,7 +25,7 @@ LED pins:
 #include "Arduino.h"
 //#include <LiquidCrystal.h>
 
-#define playerCount 4
+#define playerCount 2
 
 ///IR beam
 #define IRbeam 18
@@ -55,10 +55,20 @@ LED pins:
 
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
-#define SSID_C "Proximus-Home-5210"
-#define PWD_C "wecxmu3js3azf"
+#define SSID_C "wie dit leest is dom"
+#define PWD_C "stefissexy"
 #define MQTT_SERVER "broker.hivemq.com"
 //#define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883
+
+#define clientID "ESP32ontsmetting"
+//#define username NULL
+//#define password NULL
+//als de esp32 verbinding verliest zal er een will bericht worden uit gestuurd
+//hier kan men kiezen wat en waar
+#define willTopic_c "esp32/ontsmetten/control"
+#define willQoS_c 0
+#define willRetain_c false
+#define willMessage_c "hhhhhelp, ik peis dak een probleem eb"
 
 #endif /*CONFIG_H*/

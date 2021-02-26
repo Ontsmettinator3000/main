@@ -28,10 +28,8 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
     //als er een berich binnen komt alarm, zal het current signaal op alarm gezet worden
     if (String(topic) == "esp32/ontsmetten/control")
     {
-       
-     currentSignal = messageTemp;
-           
-        
+
+        currentSignal = messageTemp;
     }
 }
 
@@ -91,7 +89,7 @@ void MQTT::reconnect()
     {
         Serial.print("Attempting MQTT connection...");
         // Attempt to connect
-        if (client.connect("ESP32clientIBE69"))
+        if (client.connect(clientID, willTopic_c, willQoS_c, willRetain_c, willMessage_c))
         {
             Serial.println("connected");
             // Subscribe

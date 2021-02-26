@@ -62,7 +62,7 @@ void setup(void)
   Serial.println("setuping");
   //MQTT setup
   mqtt.setup();
-  
+
   //nfc setup
   nfcHandler.setup();
 
@@ -86,7 +86,7 @@ void loop(void)
       Serial.println("Alarm ontvangen");
       nfcHandler.enable();
     }
-    mqtt.lastSignal=mqtt.currentSignal;
+    mqtt.lastSignal = mqtt.currentSignal;
   }
 
   //signaal lezen van nfc indien signaal ontvangen
