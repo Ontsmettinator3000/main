@@ -15,6 +15,6 @@ public:
     boolean validate(String currentId);
     boolean login(String currentId);
     int getUserCount();
-    void reset();
+    void reset(); //verwijdert alles uit de vector
 };
 #endif

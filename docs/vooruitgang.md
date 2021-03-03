@@ -4,7 +4,8 @@
   - [Woensdag 17/02](#woensdag-1702)
   - [Donderdag 18/02](#donderdag-1802)
   - [Vrijdag 19/02](#vrijdag-1902)
-
+  - [Woensdag 24/02](#woensdag-2402)
+  - [Vrijdag 26/02](#vrijdag-2602)
 
 ## Vrijdag 12/02
 
@@ -35,3 +36,14 @@
 
 - Testen van LCD scherm dat aantal mensen die ontsmet hebben weergeeft
 - Toevoeging van config en validTag bestanden aan code
+
+## Woensdag 24/02
+
+- Testen werking pomp
+- Toevoegen mqtt
+- Samenvoegen alle aparte componenten binnen 1 bestand (lcd zorgde voor memory leak)
+
+## Vrijdag 26/02
+
+- mqtt last will toegevoegd (hhhhhelp, ik peis dak een probleem eb)
+- werking lcd herstellen (werkt maar problemen met signalen ofzo)

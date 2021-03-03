@@ -6,13 +6,13 @@
 #include "NFC.h"
 #include "IRSensor.h"
 #include "config.h"
-//#include "LCD.h"
+#include "LCD.h"
 #include "MQTT.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
-//LCD scherm;
+LCD scherm;
 MQTT mqtt;
 
 //IR IRS
@@ -50,7 +50,6 @@ void setup(void)
 {
 
   Serial.begin(115200);
-  Serial.println("setuping");
   //MQTT setup
   mqtt.setup();
 
@@ -60,7 +59,7 @@ void setup(void)
   //IR setup
   handDetector.setup();
 
-  //scherm.setup();
+  scherm.setup();
   nfcHandler.disable();
 }
 
@@ -106,8 +105,8 @@ void loop(void)
     pomp();
     if (login.getUserCount() >= playerCount)
     {
-      login.reset();
-      mqtt.setOK(); //de rest van de puzzels laten weten dat iedereen ontsmet is
+      mqtt.setOK();  //de rest van de puzzels laten weten dat iedereen ontsmet is
+      login.reset(); //nadat iedereen is ontsmet moeten de gelezen nfc-tags verwijderd worden voor hergebruik
       Serial.println("iedereen ontsmet");
     }
     else

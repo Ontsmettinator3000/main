@@ -23,7 +23,7 @@ LED pins:
 #define CONFIG_H
 
 #include "Arduino.h"
-//#include <LiquidCrystal.h>
+#include <LiquidCrystal.h>
 
 #define playerCount 2
 
@@ -44,12 +44,12 @@ LED pins:
 ///Login
 
 ///LCD scherm
-/*#define rs 12
-#define en 11
-#define d4 5
-#define d5 4
-#define d6 3
-#define d7 6*/
+#define rs 19
+#define en 32
+#define d4 33
+#define d5 25
+#define d6 26
+#define d7 27
 //
 //LiquidCrystal lcd(rs, en, d4, d5, d6, d7);                  //Deze defined de lcd pinnen al denk ik
 
