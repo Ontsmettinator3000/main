@@ -28,7 +28,7 @@ LED pins:
 #define playerCount 2
 
 ///IR beam
-#define IRbeam 18
+#define IRbeam 33
 #define LEDPIN 2
 
 #define detectDelay 10
@@ -44,34 +44,23 @@ LED pins:
 ///Login
 
 ///LCD scherm
-<<<<<<< Updated upstream
-#define rs 19
-=======
-#define rs 33 
->>>>>>> Stashed changes
-#define en 32
-#define d4 25
-#define d5 26
-#define d6 27
-#define d7 13
-//
-//LiquidCrystal lcd(rs, en, d4, d5, d6, d7);                  //Deze defined de lcd pinnen al denk ik
+#define TFT_CS 25
+#define TFT_RST 26
+#define TFT_DC 27
+#define TFT_MOSI 23
+#define TFT_CLK 18
+#define TFT_MISO 19
+
+
 
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
 //#define SSID_C "wie dit leest is dom"
-<<<<<<< Updated upstream
-//#define PWD_C "stefissexy"
-//#define MQTT_SERVER "broker.hivemq.com"
-#define SSID_C "NETGEAR68"
-#define PWD_C "excitedtuba713"
-=======
 
 #define SSID_C "NETGEAR68"
 //#define PWD_C "stefissexy"
 #define PWD_C "excitedtuba713"
 //#define MQTT_SERVER "broker.hivemq.com"
->>>>>>> Stashed changes
 #define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883
 

@@ -61,6 +61,7 @@ void setup(void)
 
   scherm.setup();
   nfcHandler.disable();
+  
 }
 
 void loop(void)
@@ -92,7 +93,7 @@ void loop(void)
         Serial.println("valid tag");
         nfcHandler.disable();
         handDetector.enable();
-        attachInterrupt(IRbeam, ISRIRrising, HIGH);
+        attachInterrupt(IRbeam, ISRIRrising, RISING);
       }
     }
   }
@@ -103,15 +104,17 @@ void loop(void)
     detachInterrupt(IRbeam);
     handDetector.disable();
     pomp();
+    
     if (login.getUserCount() >= playerCount)
     {
       mqtt.setOK();  //de rest van de puzzels laten weten dat iedereen ontsmet is
       login.reset(); //nadat iedereen is ontsmet moeten de gelezen nfc-tags verwijderd worden voor hergebruik
       Serial.println("iedereen ontsmet");
+      scherm.update(-1);
     }
     else
     {
-
+      scherm.update(login.getUserCount());
       nfcHandler.enable();
     }
   }

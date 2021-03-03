@@ -8,37 +8,38 @@ LCD::LCD()
 
 void LCD::setup()
 {
-    lcd.begin(16, 2);
-    lcd.setCursor(0, 0);
-    count = 0;
-    lcd.print("niemand ontsmet");
+    tft.begin();
+
+
+tft.fillScreen(ILI9341_BLACK);
+  tft.setCursor(1, 0);
+  tft.setTextColor(ILI9341_WHITE);  
+  tft.setTextSize(2);
+  tft.setRotation(3);    
+    //count = 0;
+    tft.print("niemand ontsmet");
 }
 
-void LCD::update()
-{
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.println("kakspel");
-    /*
-    count++;
-    count %= 4;             //als iedereen ontsmet is wordt de count terug op nul gezet kan eigenlijk niet optreden maar bon redundantie
-
-    lcd.clear();
-    lcd.setCursor(0, 0);    //zet plek waar begint te printen op kolom 0 en rij 0
+void LCD::update(int count)
+{    
+    //count++;
+    //count %= 4;             //als iedereen ontsmet is wordt de count terug op nul gezet kan eigenlijk niet optreden maar bon redundantie
+    tft.fillScreen(ILI9341_BLACK);
+    //lcd.clear();
+    tft.setCursor(0, 0);    //zet plek waar begint te printen op kolom 0 en rij 0
     if (count > 0)
     {
-        lcd.print("aantal ontsmette");
-        lcd.setCursor(0, 1);
-        lcd.print("mensen: ");
-        lcd.setCursor(8, 1);
-        lcd.print(count);   //print hoeveel mensen ontsmet zijn
+        tft.println("aantal ontsmette");
+        //tft.setCursor(0, 1);
+        tft.println("mensen: ");
+        //tft.setCursor(8, 1);
+        tft.print(count);   //print hoeveel mensen ontsmet zijn
     }
     else
     {
-        lcd.print("iedereen is ");
-        lcd.setCursor(0, 1);
-        lcd.print("ontsmet");
+        tft.println("iedereen is ");
+        //tft.setCursor(0, 1);
+        tft.print("ontsmet");
 
     }
-    */
 }
