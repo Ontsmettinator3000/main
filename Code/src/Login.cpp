@@ -31,10 +31,16 @@ boolean Login::login(String currentId)
       return false;
     }
   }
-  else return false;
+  else
+    return false;
 }
 
 int Login::getUserCount()
 {
   return scannedIDS.size();
+}
+
+void Login::reset()
+{
+  scannedIDS.clear();
 }

@@ -55,10 +55,12 @@ LED pins:
 
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
-#define SSID_C "wie dit leest is dom"
-#define PWD_C "stefissexy"
-#define MQTT_SERVER "broker.hivemq.com"
-//#define MQTT_SERVER "192.168.1.2"
+//#define SSID_C "wie dit leest is dom"
+//#define PWD_C "stefissexy"
+//#define MQTT_SERVER "broker.hivemq.com"
+#define SSID_C "NETGEAR68"
+#define PWD_C "excitedtuba713"
+#define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883
 
 #define clientID "ESP32ontsmetting"

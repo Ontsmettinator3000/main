@@ -25,20 +25,11 @@ uint32_t lastPump = 0;
 uint32_t pumpDelay = 500;
 bool busyPomp = false;
 
-void IRAM_ATTR ISRIRfalling()
-{
-  handDetector.fallingIR();
-  if (nfcHandler.cardDetected)
-  {
-    attachInterrupt(digitalPinToInterrupt(IRbeam), ISRIRrising, RISING);
-  }
-}
-
 void IRAM_ATTR ISRIRrising()
 {
-  //handDetector.risingIR();
-  busyPomp = true;
   detachInterrupt(digitalPinToInterrupt(IRbeam));
+  handDetector.risingIR();
+  busyPomp = true;
 }
 
 void pomp()
@@ -102,22 +93,26 @@ void loop(void)
         Serial.println("valid tag");
         nfcHandler.disable();
         handDetector.enable();
-        attachInterrupt(digitalPinToInterrupt(IRbeam), ISRIRrising, RISING);
+        attachInterrupt(IRbeam, ISRIRrising, HIGH);
       }
     }
   }
   //busy pomp zal true zijn als er moet gepompt worden (wordt true gezet door ir beam)
   if (busyPomp)
   {
-    pomp();
     busyPomp = false;
+    detachInterrupt(IRbeam);
+    handDetector.disable();
+    pomp();
     if (login.getUserCount() >= playerCount)
     {
+      login.reset();
       mqtt.setOK(); //de rest van de puzzels laten weten dat iedereen ontsmet is
       Serial.println("iedereen ontsmet");
     }
     else
     {
+
       nfcHandler.enable();
     }
   }

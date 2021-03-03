@@ -15,5 +15,6 @@ public:
     boolean validate(String currentId);
     boolean login(String currentId);
     int getUserCount();
+    void reset();
 };
 #endif
