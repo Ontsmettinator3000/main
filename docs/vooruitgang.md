@@ -47,3 +47,14 @@
 
 - mqtt last will toegevoegd (hhhhhelp, ik peis dak een probleem eb)
 - werking lcd herstellen (werkt maar problemen met signalen ofzo)
+
+## Woensdag 3/03
+
+- TFT scherm aangesloten
+- Software gedebugt (IR sensor werkt niet meer)
+- MQTT werkt naar behoren met de broker
+- Begin versterker solderen (niet standaard maat pinheaders) 
+
+## Donderdag 4/03
+
+- Opstart pcb ontwerp
