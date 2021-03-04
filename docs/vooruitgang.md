@@ -60,3 +60,4 @@
 ## Donderdag 4/03
 
 - Opstart pcb ontwerp
+- Versterker volledig gesoldeerd en getest
