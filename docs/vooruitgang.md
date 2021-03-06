@@ -8,7 +8,8 @@
   - [Vrijdag 26/02](#vrijdag-2602)
   - [Woensdag 3/03](#woensdag-303)
   - [Donderdag 4/03](#donderdag-403)
-  - [Vrijdag 5/03] (#vrijdag-503)
+  - [Vrijdag 5/03](#vrijdag-503)
+  - [Zaterdag 7/03](#zaterdag-603)
 
 ## Vrijdag 12/02
 
@@ -63,6 +64,10 @@
 - Opstart pcb ontwerp
 - Versterker volledig gesoldeerd en getest
 
-##Vrijdag 5/03
+## Vrijdag 5/03
 
--toevoegen versterker en mosfet aan KiCad schematic
+- Toevoegen versterker en mosfet aan KiCad schematic
+
+## Zaterdag 6/03
+
+- Opstart ontwerp casing
