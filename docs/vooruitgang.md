@@ -8,6 +8,7 @@
   - [Vrijdag 26/02](#vrijdag-2602)
   - [Woensdag 3/03](#woensdag-303)
   - [Donderdag 4/03](#donderdag-403)
+  - [Vrijdag 5/03] (#vrijdag-503)
 
 ## Vrijdag 12/02
 
@@ -47,8 +48,8 @@
 
 ## Vrijdag 26/02
 
-- mqtt last will toegevoegd (hhhhhelp, ik peis dak een probleem eb)
-- werking lcd herstellen (werkt maar problemen met signalen ofzo)
+- mqtt last will toegevoegd 
+- werking lcd herstellen (oude lcd, werd vervangen)
 
 ## Woensdag 3/03
 
@@ -61,3 +62,7 @@
 
 - Opstart pcb ontwerp
 - Versterker volledig gesoldeerd en getest
+
+##Vrijdag 5/03
+
+-toevoegen versterker en mosfet aan KiCad schematic
