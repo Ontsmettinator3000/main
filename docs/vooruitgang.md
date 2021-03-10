@@ -10,6 +10,7 @@
   - [Donderdag 4/03](#donderdag-403)
   - [Vrijdag 5/03](#vrijdag-503)
   - [Zaterdag 7/03](#zaterdag-603)
+  - [Dinsdag 9/03](#dinsdag-903)
 
 ## Vrijdag 12/02
 
@@ -71,3 +72,7 @@
 ## Zaterdag 6/03
 
 - Opstart ontwerp casing
+
+## Dinsdag 9/03
+
+-Ordenen PCB en beetje routing
