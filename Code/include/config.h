@@ -45,11 +45,10 @@ LED pins:
 
 ///LCD scherm
 <<<<<<< Updated upstream
-#define rs 19
-=======
+#define rs 19 == == == =
 #define rs 33 
 >>>>>>> Stashed changes
-#define en 32
+                           #define en 32
 #define d4 25
 #define d5 26
 #define d6 27
@@ -60,18 +59,11 @@ LED pins:
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
 //#define SSID_C "wie dit leest is dom"
-<<<<<<< Updated upstream
-//#define PWD_C "stefissexy"
-//#define MQTT_SERVER "broker.hivemq.com"
-#define SSID_C "NETGEAR68"
-#define PWD_C "excitedtuba713"
-=======
 
 #define SSID_C "NETGEAR68"
 //#define PWD_C "stefissexy"
 #define PWD_C "excitedtuba713"
 //#define MQTT_SERVER "broker.hivemq.com"
->>>>>>> Stashed changes
 #define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883
 
