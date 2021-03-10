@@ -2,18 +2,21 @@
 #include <Wire.h>
 #include <SPI.h>
 
+#include "config.h"
+
 #include "Login.h"
 #include "NFC.h"
 #include "IRSensor.h"
-#include "config.h"
 #include "LCD.h"
 #include "MQTT.h"
+#include "Speaker.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
 LCD scherm;
 MQTT mqtt;
+Speaker speaker;
 
 //IR IRS
 void IRAM_ATTR ISRIRfalling();
@@ -50,6 +53,7 @@ void setup(void)
 {
 
   Serial.begin(115200);
+  pinMode(LEDPIN,OUTPUT);
   //MQTT setup
   mqtt.setup();
 
@@ -68,6 +72,7 @@ void loop(void)
 {
   //signaal lezen van broker
   mqtt.loop();
+  speaker.loop();
 
   if (mqtt.lastSignal != mqtt.getCurrentSignal())
   {
@@ -76,6 +81,7 @@ void loop(void)
     {
       Serial.println("Alarm ontvangen");
       nfcHandler.enable();
+      speaker.play();
     }
     mqtt.lastSignal = mqtt.currentSignal;
   }

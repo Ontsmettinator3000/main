@@ -23,12 +23,11 @@ LED pins:
 #define CONFIG_H
 
 #include "Arduino.h"
-#include <LiquidCrystal.h>
 
 #define playerCount 2
 
 ///IR beam
-#define IRbeam 33
+#define IRbeam 35
 #define LEDPIN 2
 
 #define detectDelay 10
@@ -45,13 +44,15 @@ LED pins:
 
 ///LCD scherm
 #define TFT_CS 25
-#define TFT_RST 26
+#define TFT_RST 32
 #define TFT_DC 27
 #define TFT_MOSI 23
 #define TFT_CLK 18
 #define TFT_MISO 19
 
-
+//Alarm
+#define AlarmPin 26
+#define SpeakerEnable 33
 
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
