@@ -54,15 +54,21 @@ LED pins:
 #define AlarmPin 26
 #define SpeakerEnable 33
 
+// Pomp
+#define PWMchannel 1
+#define PWMfrequency 5000
+
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
 //#define SSID_C "wie dit leest is dom"
 
-#define SSID_C "NETGEAR68"
-//#define PWD_C "stefissexy"
-#define PWD_C "excitedtuba713"
-//#define MQTT_SERVER "broker.hivemq.com"
-#define MQTT_SERVER "192.168.1.2"
+//#define SSID_C "NETGEAR68"
+#define SSID_C "Proximus-Home-5210"
+
+#define PWD_C "wecxmu3js3azf"
+//#define PWD_C "excitedtuba713"
+#define MQTT_SERVER "broker.hivemq.com"
+//#define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883
 
 #define clientID "ESP32ontsmetting"

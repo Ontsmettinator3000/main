@@ -11,6 +11,7 @@
 #include "MQTT.h"
 #include "Speaker.h"
 
+
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
@@ -25,7 +26,7 @@ void IRAM_ATTR ISRIRrising();
 //Pomp vars
 void pomp();
 uint32_t lastPump = 0;
-uint32_t pumpDelay = 500;
+uint32_t pumpDelay = 10;
 bool busyPomp = false;
 
 void IRAM_ATTR ISRIRrising()
@@ -39,12 +40,13 @@ void pomp()
 {
   lastPump = millis();
   Serial.println("Bezig met pompen");
-  digitalWrite(LEDPIN, HIGH);
+  ledcWrite(PWMchannel,190);
   for (int i = 0; i < 10; i++)
   {
     Serial.print(".");
-    delay(500);
+    delay(100);
   }
+  ledcWrite(PWMchannel,0);
   Serial.println("Pompen klaar");
   digitalWrite(LEDPIN, LOW);
 }
@@ -54,6 +56,9 @@ void setup(void)
 
   Serial.begin(115200);
   pinMode(LEDPIN,OUTPUT);
+  ledcSetup(PWMchannel,PWMfrequency,8);
+  ledcAttachPin(LEDPIN,PWMchannel);
+
   //MQTT setup
   mqtt.setup();
 
