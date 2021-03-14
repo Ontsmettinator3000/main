@@ -12,6 +12,9 @@
   - [Zaterdag 7/03](#zaterdag-603)
   - [Dinsdag 9/03](#dinsdag-903)
   - [Woensdag 10/03](#woensdag-1003)
+  - [Donderdag 11/03](#donderdag-1103)
+  - [Zaterdag 13/03](#zaterdag-1303)
+  - [Zondag 14/03](#zondag-1403)
 
 ## Vrijdag 12/02
 
