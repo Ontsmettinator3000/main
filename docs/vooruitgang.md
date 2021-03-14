@@ -11,6 +11,7 @@
   - [Vrijdag 5/03](#vrijdag-503)
   - [Zaterdag 7/03](#zaterdag-603)
   - [Dinsdag 9/03](#dinsdag-903)
+  - [Woensdag 10/03](#woensdag-1003)
 
 ## Vrijdag 12/02
 
@@ -75,4 +76,21 @@
 
 ## Dinsdag 9/03
 
--Ordenen PCB en beetje routing
+- Ordenen PCB en beetje routing
+
+## Woensdag 10/03
+
+- Testen versterker en speaker binnen volledige schakeling
+- wtf ik weet nimeer wat we woensdag gedaan hebben raar
+
+## Donderdag 11/03
+
+- Uitbreiden pcb ontwerp volgens feedback presentatie 10/03
+
+## Zaterdag 13/03
+
+- 2de versie PCB afwerken
+
+## Zondag 14/03
+
+- Toevoegen final touches volgens feedback op 2de pcb ontwerp
