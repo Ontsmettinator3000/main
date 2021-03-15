@@ -15,7 +15,8 @@
   - [Donderdag 11/03](#donderdag-1103)
   - [Zaterdag 13/03](#zaterdag-1303)
   - [Zondag 14/03](#zondag-1403)
-
+  - [Maandag 15/03](#maandag-1503)
+  
 ## Vrijdag 12/02
 
 - Servo getest:
@@ -84,6 +85,7 @@
 ## Woensdag 10/03
 
 - Testen versterker en speaker binnen volledige schakeling
+- 
 - wtf ik weet nimeer wat we woensdag gedaan hebben raar
 
 ## Donderdag 11/03
@@ -97,3 +99,8 @@
 ## Zondag 14/03
 
 - Toevoegen final touches volgens feedback op 2de pcb ontwerp
+
+## Maandag 15/03
+
+- Kleine details aan pcb toegevoegd
+- MLCC vervangen voor ELCO indien nodig
