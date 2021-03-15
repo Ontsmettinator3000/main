@@ -85,8 +85,9 @@
 ## Woensdag 10/03
 
 - Testen versterker en speaker binnen volledige schakeling
-- 
-- wtf ik weet nimeer wat we woensdag gedaan hebben raar
+- Breadboard implementatie getest
+- Nieuwe IR sensor (oude kapot)
+- Ontwerp graphics voor scherm
 
 ## Donderdag 11/03
 
