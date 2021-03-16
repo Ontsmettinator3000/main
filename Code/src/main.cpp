@@ -55,9 +55,8 @@ void setup(void)
 
   //motor setup
   pinMode(LEDPIN, OUTPUT);
-  digitalWrite(LEDPIN, HIGH);
-  //ledcSetup(PWMchannel, PWMfrequency, 8);
-  //ledcAttachPin(LEDPIN, PWMchannel);
+  ledcSetup(PWMchannel, PWMfrequency, 8);
+  ledcAttachPin(LEDPIN, PWMchannel);
 
   //TFT setup
   scherm.setup();
@@ -71,12 +70,12 @@ void setup(void)
   ArduinoOTA.begin();
 
   //nfc setup
-  //nfcHandler.setup();
+  nfcHandler.setup();
 
   //IR setup
-  //handDetector.setup();
+  handDetector.setup();
 
-  //nfcHandler.disable();
+  nfcHandler.disable();
 }
 
 void loop(void)
