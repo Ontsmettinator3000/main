@@ -28,7 +28,6 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
     //als er een berich binnen komt alarm, zal het current signaal op alarm gezet worden
     if (String(topic) == "esp32/ontsmetten/control")
     {
-
         currentSignal = messageTemp;
     }
 }
@@ -42,6 +41,8 @@ void MQTT::setup()
     using std::placeholders::_2;
     using std::placeholders::_3;
     client.setCallback(std::bind(&MQTT::callback, this, _1, _2, _3));
+    loop();
+    client.publish("esp32/ontsmetten/ip", (WiFi.localIP().toString()).c_str(), true);
 }
 
 void MQTT::setupWifi()
@@ -49,7 +50,7 @@ void MQTT::setupWifi()
 
     delay(10);
     Serial.println("Connecting to WiFi..");
-
+    WiFi.mode(WIFI_STA);
     WiFi.begin(SSID_C, PWD_C);
 
     while (WiFi.status() != WL_CONNECTED)

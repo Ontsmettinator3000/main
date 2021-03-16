@@ -13,13 +13,19 @@ static Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
 
 class LCD
 {
-    private:
+private:
     //uint8_t count =0;
 
-    public:
+public:
     LCD();
     void setup();
     void update(int count);
 
+    void loop();
+    void clear();
+
+    void paintGevaar();
+    void paintCheck(int positie);
+    void paintCross(int positie);
 };
 #endif

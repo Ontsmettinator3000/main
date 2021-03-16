@@ -1,6 +1,5 @@
 #include <Arduino.h>
-#include <Wire.h>
-#include <SPI.h>
+#include <ArduinoOTA.h>
 
 #include "config.h"
 
@@ -10,7 +9,6 @@
 #include "LCD.h"
 #include "MQTT.h"
 #include "Speaker.h"
-
 
 Login login;
 NFC nfcHandler;
@@ -40,51 +38,70 @@ void pomp()
 {
   lastPump = millis();
   Serial.println("Bezig met pompen");
-  ledcWrite(PWMchannel,190);
+  ledcWrite(PWMchannel, 190);
   for (int i = 0; i < 10; i++)
   {
     Serial.print(".");
     delay(100);
   }
-  ledcWrite(PWMchannel,0);
+  ledcWrite(PWMchannel, 0);
   Serial.println("Pompen klaar");
   digitalWrite(LEDPIN, LOW);
 }
 
 void setup(void)
 {
-
   Serial.begin(115200);
-  pinMode(LEDPIN,OUTPUT);
-  ledcSetup(PWMchannel,PWMfrequency,8);
-  ledcAttachPin(LEDPIN,PWMchannel);
+
+  //motor setup
+  pinMode(LEDPIN, OUTPUT);
+  digitalWrite(LEDPIN, HIGH);
+  //ledcSetup(PWMchannel, PWMfrequency, 8);
+  //ledcAttachPin(LEDPIN, PWMchannel);
+
+  //TFT setup
+  scherm.setup();
 
   //MQTT setup
   mqtt.setup();
 
+  //OTA setup
+  ArduinoOTA.setHostname(OTA_HOSTNAME);
+  ArduinoOTA.setPassword(OTA_PWD);
+  ArduinoOTA.begin();
+
   //nfc setup
-  nfcHandler.setup();
+  //nfcHandler.setup();
 
   //IR setup
-  handDetector.setup();
+  //handDetector.setup();
 
-  scherm.setup();
-  nfcHandler.disable();
-  
+  //nfcHandler.disable();
 }
 
 void loop(void)
 {
+  ArduinoOTA.handle();
+
   //signaal lezen van broker
   mqtt.loop();
   speaker.loop();
-
+  if (mqtt.getCurrentSignal() == "REBOOT")
+  {
+    ESP.restart();
+  }
   if (mqtt.lastSignal != mqtt.getCurrentSignal())
   {
     //er is een aanpassing
     if (mqtt.getCurrentSignal() == "ALARM")
     {
+      scherm.clear();
       Serial.println("Alarm ontvangen");
+      scherm.paintGevaar();
+      for (int i = 0; i < 4; i++)
+      {
+        scherm.paintCheck(i);
+      }
       nfcHandler.enable();
       speaker.play();
     }
@@ -115,17 +132,15 @@ void loop(void)
     detachInterrupt(IRbeam);
     handDetector.disable();
     pomp();
-    
+    scherm.paintCross(login.getUserCount() - 1);
     if (login.getUserCount() >= playerCount)
     {
       mqtt.setOK();  //de rest van de puzzels laten weten dat iedereen ontsmet is
       login.reset(); //nadat iedereen is ontsmet moeten de gelezen nfc-tags verwijderd worden voor hergebruik
       Serial.println("iedereen ontsmet");
-      scherm.update(-1);
     }
     else
     {
-      scherm.update(login.getUserCount());
       nfcHandler.enable();
     }
   }
