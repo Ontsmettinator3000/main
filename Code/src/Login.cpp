@@ -22,7 +22,7 @@ boolean Login::validate(String currentId)
 #ifdef duoOntsmetting
   for (int i = 0; i < bestemtteIDS.size(); i++)
   {
-    if (tags[bestemtteIDS.at(i);].compareTo(currentId) == 0)
+    if (tags[bestemtteIDS.at(i)].compareTo(currentId) == 0)
     {
       return true;
     }

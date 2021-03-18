@@ -141,7 +141,7 @@ void loop(void)
     detachInterrupt(IRbeam);
     handDetector.disable();
     pomp();
-    scherm.paintCross(login.getUserCount() - 1);
+    scherm.paintCheck(login.getUserCount() - 1);
 
     if (login.getUserCount() >=
 #ifdef groepsOntsmetting
