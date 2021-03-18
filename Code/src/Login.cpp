@@ -22,7 +22,8 @@ boolean Login::validate(String currentId)
 #ifdef duoOntsmetting
   for (int i = 0; i < bestemtteIDS.size(); i++)
   {
-    if (tags[bestemtteIDS.at(i)].compareTo(currentId) == 0)
+    int index = bestemtteIDS.at(i);
+    if (tags[index].compareTo(currentId) == 0)
     {
       return true;
     }
@@ -65,4 +66,9 @@ void Login::setId(String ids)
   bestemtteIDS.clear();
   bestemtteIDS.push_back(ids.charAt(0) - 0);
   bestemtteIDS.push_back(ids.charAt(1) - 0);
+  Serial.print("id set: ");
+  for (unsigned i = 0; i < bestemtteIDS.size(); i++)
+  {
+    Serial.println(bestemtteIDS.at(i));
+  }
 }
