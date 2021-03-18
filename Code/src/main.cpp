@@ -97,10 +97,20 @@ void loop(void)
       scherm.clear();
       Serial.println("Alarm ontvangen");
       scherm.paintGevaar();
-      for (int i = 0; i < 4; i++)
+
+#ifdef groepsOntsmetting
+      for (int i = 0; i < playerCount; i++)
       {
-        scherm.paintCheck(i);
+        scherm.paintCross(i);
       }
+#endif
+#ifdef duoOntsmetting
+      for (int i = 0; i < 2; i++)
+      {
+        scherm.paintCross(i);
+      }
+#endif
+
       nfcHandler.enable();
       speaker.play();
     }
@@ -132,7 +142,15 @@ void loop(void)
     handDetector.disable();
     pomp();
     scherm.paintCross(login.getUserCount() - 1);
-    if (login.getUserCount() >= playerCount)
+
+    if (login.getUserCount() >=
+#ifdef groepsOntsmetting
+        playerCount
+#endif
+#ifdef duoOntsmetting
+        2
+#endif
+    )
     {
       mqtt.setOK();  //de rest van de puzzels laten weten dat iedereen ontsmet is
       login.reset(); //nadat iedereen is ontsmet moeten de gelezen nfc-tags verwijderd worden voor hergebruik

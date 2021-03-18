@@ -32,10 +32,10 @@ void LCD::paintCheck(int positie)
         tft.drawRGBBitmap(20, 20, (uint16_t *)check, 50, 50);
         break;
     case 1:
-        tft.drawRGBBitmap(20, SCREEN_HEIGHT - 20 - 50, (uint16_t *)check, 50, 50);
+        tft.drawRGBBitmap(SCREEN_WIDTH - 20 - 50, 20, (uint16_t *)check, 50, 50);
         break;
     case 2:
-        tft.drawRGBBitmap(SCREEN_WIDTH - 20 - 50, 20, (uint16_t *)check, 50, 50);
+        tft.drawRGBBitmap(20, SCREEN_HEIGHT - 20 - 50, (uint16_t *)check, 50, 50);
         break;
     case 3:
         tft.drawRGBBitmap(SCREEN_WIDTH - 20 - 50, SCREEN_HEIGHT - 20 - 50, (uint16_t *)check, 50, 50);

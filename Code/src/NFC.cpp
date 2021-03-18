@@ -139,7 +139,7 @@ String NFC::getCardDetected()
                 cardDetected = true;
                 timeSinceCardDetected = millis();
                 id = handleCardDetected();
-                //Serial.println(id);
+                Serial.println(id);
             }
             irqPrev = irqCurr;
             return id;
