@@ -24,7 +24,7 @@ LED pins:
 
 #include "Arduino.h"
 
-#define playerCount 2
+#define playerCount 4
 
 ///IR beam
 #define IRbeam 35

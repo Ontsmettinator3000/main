@@ -29,8 +29,9 @@ public:
     MQTT();
     String lastSignal;    //laatste signaal dat binnen gekomen is
     String currentSignal; //signaal dat momenteel binnen gekomen is
-    void setup();         //algemen setup van de klasse
-    void setupWifi();     //wifi verbinding setup
+    String currentId;
+    void setup();     //algemen setup van de klasse
+    void setupWifi(); //wifi verbinding setup
     void reconnect();
     void callback(char *topic, byte *message, unsigned int length); //deze methode wordt opgeroepen als er een bericht binne komt via mqtt
     String getCurrentSignal();

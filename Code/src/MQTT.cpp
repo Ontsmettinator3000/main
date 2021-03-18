@@ -30,6 +30,10 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
     {
         currentSignal = messageTemp;
     }
+    if (String(topic) == "esp32/ontsmetten/id")
+    {
+        currentId = messageTemp;
+    }
 }
 
 void MQTT::setup()
@@ -94,7 +98,7 @@ void MQTT::reconnect()
         {
             Serial.println("connected");
             // Subscribe
-            client.subscribe("esp32/ontsmetten/control");
+            client.subscribe("esp32/ontsmetten/#");
         }
         else
         {

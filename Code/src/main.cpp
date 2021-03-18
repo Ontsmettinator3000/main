@@ -109,8 +109,8 @@ void loop(void)
       {
         scherm.paintCross(i);
       }
+      login.setId(mqtt.currentId);
 #endif
-
       nfcHandler.enable();
       speaker.play();
     }
