@@ -64,8 +64,8 @@ void Login::reset()
 void Login::setId(String ids)
 {
   bestemtteIDS.clear();
-  bestemtteIDS.push_back(ids.charAt(0) - 0);
-  bestemtteIDS.push_back(ids.charAt(1) - 0);
+  bestemtteIDS.push_back(ids.charAt(0) - 48);
+  bestemtteIDS.push_back(ids.charAt(1) - 48);
   Serial.print("id set: ");
   for (unsigned i = 0; i < bestemtteIDS.size(); i++)
   {
