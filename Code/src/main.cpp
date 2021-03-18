@@ -89,8 +89,7 @@ void loop(void)
   {
     ESP.restart();
   }
-  if (mqtt.lastSignal != mqtt.getCurrentSignal())
-  {
+
     //er is een aanpassing
     if (mqtt.getCurrentSignal() == "ALARM")
     {
@@ -114,8 +113,8 @@ void loop(void)
       nfcHandler.enable();
       speaker.play();
     }
-    mqtt.lastSignal = mqtt.currentSignal;
-  }
+    mqtt.currentSignal= "";
+  
 
   //signaal lezen van nfc indien signaal ontvangen
 
