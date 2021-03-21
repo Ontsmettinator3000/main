@@ -112,6 +112,7 @@
 ## Woensdag 17/03
 
 - Testprint pcb op kalkpapier
+- presentatie 
 
 ## Donderdag 18/03
 
