@@ -16,6 +16,9 @@
   - [Zaterdag 13/03](#zaterdag-1303)
   - [Zondag 14/03](#zondag-1403)
   - [Maandag 15/03](#maandag-1503)
+  - [Woensdag 17/03](#woensdag-1703)
+  - [Donderdag 18/03](donderdag-1803)
+  - [Zaterdag 20/03](#zaterdag-2003)
   
 ## Vrijdag 12/02
 
@@ -105,3 +108,15 @@
 
 - Kleine details aan pcb toegevoegd
 - MLCC vervangen voor ELCO indien nodig
+
+## Woensdag 17/03
+
+- Testprint pcb op kalkpapier
+
+## Donderdag 18/03
+
+- Optie om dynamisch tags aan het alarm te verbinden in code
+
+## Zaterdag 20/03
+
+-Controle met kleine aanpassingen aan PCB (finaal??)
