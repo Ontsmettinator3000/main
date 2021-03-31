@@ -41,8 +41,8 @@ LED pins:
 #define DELAY_BETWEEN_CARDS 500
 
 ///Login
-//#define groepsOntsmetting //iedereen zal moeten ontsmet worden bij alarm
-#define duoOntsmetting
+#define groepsOntsmetting //iedereen zal moeten ontsmet worden bij alarm
+//#define duoOntsmetting
 
 ///LCD scherm
 #define TFT_CS 25
@@ -51,7 +51,7 @@ LED pins:
 #define TFT_MOSI 23
 #define TFT_CLK 18
 #define TFT_MISO 19
-
+#define TFT_ENABLE 17
 //Alarm
 #define AlarmPin 26
 #define SpeakerEnable 33

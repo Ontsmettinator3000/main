@@ -17,15 +17,20 @@ void Speaker::setup()
 {
     pinMode(SpeakerEnable,OUTPUT);
     digitalWrite(SpeakerEnable,LOW);
+    pinMode(12,OUTPUT);
 }
 
 void Speaker::play(){
     digitalWrite(SpeakerEnable,HIGH);
+    digitalWrite(12,HIGH);
     DacAudio.FillBuffer();     
- 
+    
     Serial.println("ALARM AFSPELEN BRBRBRBRRB");
     
-    DacAudio.Play(&Sound);   
+    DacAudio.Play(&Sound);
+    delay(2000);
     digitalWrite(SpeakerEnable,LOW); 
+    digitalWrite(12,LOW);
+    
 }
 

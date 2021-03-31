@@ -76,6 +76,8 @@ void setup(void)
   handDetector.setup();
 
   nfcHandler.disable();
+
+  speaker.setup();
 }
 
 void loop(void)
