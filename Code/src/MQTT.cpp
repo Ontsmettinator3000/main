@@ -55,14 +55,26 @@ void MQTT::setupWifi()
     delay(10);
     Serial.println("Connecting to WiFi..");
     WiFi.mode(WIFI_STA);
-    WiFi.begin(SSID_C, PWD_C);
+    WiFi.begin(SSID_C1, PWD_C1);
     int timeWait = 0;
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(500);
         Serial.print(".");
         timeWait++;
-        if (timeWait > 10)
+        if (timeWait == (int)10)
+        {
+            WiFi.disconnect();
+            WiFi.begin(SSID_C2, PWD_C2);
+            Serial.println("tweede wifi netwerk proberen");
+        }
+        else if (timeWait == (int)20)
+        {
+            WiFi.disconnect();
+            WiFi.begin(SSID_C3, PWD_C3);
+            Serial.println("derde");
+        }
+        else if (timeWait == (int)30)
         {
             for (int i = 0; i < 10; i++)
             {
