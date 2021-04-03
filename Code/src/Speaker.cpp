@@ -25,12 +25,12 @@ void Speaker::play(){
     digitalWrite(12,HIGH);
     DacAudio.FillBuffer();     
     
-    Serial.println("ALARM AFSPELEN BRBRBRBRRB");
-    
+    Serial.println("ALARM AFSPELEN BRBRBRBRRB"); 
     DacAudio.Play(&Sound);
-    delay(2000);
-    digitalWrite(SpeakerEnable,LOW); 
     digitalWrite(12,LOW);
+    DacAudio.FillBuffer();
+    //delay(5000);
+    //digitalWrite(SpeakerEnable,LOW);
     
 }
 
