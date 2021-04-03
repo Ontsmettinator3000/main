@@ -19,6 +19,7 @@ private:
 
 public:
     bool cardDetected = false;
+    bool setupped;
     NFC();
     void setup();
     void startListeningToNFC();

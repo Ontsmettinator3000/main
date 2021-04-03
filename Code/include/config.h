@@ -24,11 +24,12 @@ LED pins:
 
 #include "Arduino.h"
 
+///General
 #define playerCount 4
+#define LEDPIN 12
 
 ///IR beam
 #define IRbeam 35
-#define LEDPIN 2
 
 #define detectDelay 10
 #define downDelay 10
@@ -41,8 +42,8 @@ LED pins:
 #define DELAY_BETWEEN_CARDS 500
 
 ///Login
-#define groepsOntsmetting //iedereen zal moeten ontsmet worden bij alarm
-//#define duoOntsmetting
+//#define groepsOntsmetting //iedereen zal moeten ontsmet worden bij alarm
+#define duoOntsmetting
 
 ///LCD scherm
 #define TFT_CS 25
@@ -59,18 +60,19 @@ LED pins:
 // Pomp
 #define PWMchannel 1
 #define PWMfrequency 5000
+#define PompPin 2
 
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
 //#define SSID_C "wie dit leest is dom"
 
-#define SSID_C "NETGEAR68"
+//#define SSID_C "NETGEAR68"
 //#define SSID_C "Proximus-Home-5210"
-//#define SSID_C "Veirken_2.4"
+#define SSID_C "Veirken_2.4"
 
 //#define PWD_C "wecxmu3js3azf"
-#define PWD_C "excitedtuba713"
-//#define PWD_C "katrien-geert"
+//#define PWD_C "excitedtuba713"
+#define PWD_C "katrien-geert"
 #define MQTT_SERVER "broker.hivemq.com"
 //#define MQTT_SERVER "192.168.1.2"
 #define MQTT_PORT 1883

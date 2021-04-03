@@ -46,17 +46,18 @@ void pomp()
   }
   ledcWrite(PWMchannel, 0);
   Serial.println("Pompen klaar");
-  digitalWrite(LEDPIN, LOW);
+  digitalWrite(PompPin, LOW);
 }
 
 void setup(void)
 {
   Serial.begin(115200);
+  pinMode(LEDPIN, OUTPUT);
 
   //motor setup
-  pinMode(LEDPIN, OUTPUT);
+  pinMode(PompPin, OUTPUT);
   ledcSetup(PWMchannel, PWMfrequency, 8);
-  ledcAttachPin(LEDPIN, PWMchannel);
+  ledcAttachPin(PompPin, PWMchannel);
 
   //TFT setup
   scherm.setup();
@@ -92,31 +93,30 @@ void loop(void)
     ESP.restart();
   }
 
-    //er is een aanpassing
-    if (mqtt.getCurrentSignal() == "ALARM")
-    {
-      scherm.clear();
-      Serial.println("Alarm ontvangen");
-      scherm.paintGevaar();
+  //er is een aanpassing
+  if (mqtt.getCurrentSignal() == "ALARM")
+  {
+    scherm.clear();
+    Serial.println("Alarm ontvangen");
+    scherm.paintGevaar();
 
 #ifdef groepsOntsmetting
-      for (int i = 0; i < playerCount; i++)
-      {
-        scherm.paintCross(i);
-      }
+    for (int i = 0; i < playerCount; i++)
+    {
+      scherm.paintCross(i);
+    }
 #endif
 #ifdef duoOntsmetting
-      for (int i = 0; i < 2; i++)
-      {
-        scherm.paintCross(i);
-      }
-      login.setId(mqtt.currentId);
-#endif
-      nfcHandler.enable();
-      speaker.play();
+    for (int i = 0; i < 2; i++)
+    {
+      scherm.paintCross(i);
     }
-    mqtt.currentSignal= "";
-  
+    login.setId(mqtt.currentId);
+#endif
+    nfcHandler.enable();
+    speaker.play();
+  }
+  mqtt.currentSignal = "";
 
   //signaal lezen van nfc indien signaal ontvangen
 

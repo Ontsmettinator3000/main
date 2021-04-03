@@ -56,11 +56,23 @@ void MQTT::setupWifi()
     Serial.println("Connecting to WiFi..");
     WiFi.mode(WIFI_STA);
     WiFi.begin(SSID_C, PWD_C);
-
+    int timeWait = 0;
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(500);
         Serial.print(".");
+        timeWait++;
+        if (timeWait > 10)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                digitalWrite(LEDPIN, HIGH);
+                delay(500);
+                digitalWrite(LEDPIN, LOW);
+                delay(100);
+            }
+            ESP.restart();
+        }
     }
 
     Serial.println("");
@@ -106,6 +118,13 @@ void MQTT::reconnect()
             Serial.print(client.state());
             Serial.println(" try again in 5 seconds");
             // Wait 5 seconds before retrying
+            for (int i = 0; i < 10; i++)
+            {
+                digitalWrite(LEDPIN, HIGH);
+                delay(100);
+                digitalWrite(LEDPIN, LOW);
+                delay(500);
+            }
             delay(5000);
         }
     }
