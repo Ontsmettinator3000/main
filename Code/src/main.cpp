@@ -38,7 +38,7 @@ void pomp()
 {
   lastPump = millis();
   Serial.println("Bezig met pompen");
-  ledcWrite(PWMchannel, 190);
+  ledcWrite(PWMchannel, 230); //duty cycle van 230 is ideaal bij darm van 30cm
   for (int i = 0; i < 10; i++)
   {
     Serial.print(".");
