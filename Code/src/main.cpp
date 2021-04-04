@@ -9,12 +9,15 @@
 #include "LCD.h"
 #include "MQTT.h"
 #include "Speaker.h"
+#include "Monitor.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
 LCD scherm;
 MQTT mqtt;
+//Monitor monitor(&mqtt, &scherm);
+
 Speaker speaker;
 
 //IR IRS
@@ -37,15 +40,15 @@ void IRAM_ATTR ISRIRrising()
 void pomp()
 {
   lastPump = millis();
-  Serial.println("Bezig met pompen");
+  Monitor::println("Bezig met pompen");
   ledcWrite(PWMchannel, 230); //duty cycle van 230 is ideaal bij darm van 30cm
   for (int i = 0; i < 10; i++)
   {
-    Serial.print(".");
+    Monitor::println(".");
     delay(100);
   }
   ledcWrite(PWMchannel, 0);
-  Serial.println("Pompen klaar");
+  Monitor::println("Pompen klaar");
   digitalWrite(PompPin, LOW);
 }
 
@@ -64,6 +67,8 @@ void setup(void)
 
   //MQTT setup
   mqtt.setup();
+
+  Monitor::setup(mqtt, scherm);
 
   //OTA setup
   ArduinoOTA.setHostname(OTA_HOSTNAME);
@@ -97,7 +102,7 @@ void loop(void)
   if (mqtt.getCurrentSignal() == "ALARM")
   {
     scherm.clear();
-    Serial.println("Alarm ontvangen");
+    Monitor::println("Alarm ontvangen");
     scherm.paintGevaar();
 
 #ifdef groepsOntsmetting
@@ -128,7 +133,7 @@ void loop(void)
     {
       if (login.login(id))
       {
-        Serial.println("valid tag");
+        Monitor::println("valid tag");
         nfcHandler.disable();
         handDetector.enable();
         attachInterrupt(IRbeam, ISRIRrising, RISING);
@@ -155,7 +160,7 @@ void loop(void)
     {
       mqtt.setOK();  //de rest van de puzzels laten weten dat iedereen ontsmet is
       login.reset(); //nadat iedereen is ontsmet moeten de gelezen nfc-tags verwijderd worden voor hergebruik
-      Serial.println("iedereen ontsmet");
+      Monitor::println("iedereen ontsmet");
     }
     else
     {

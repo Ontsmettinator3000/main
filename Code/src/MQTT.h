@@ -5,6 +5,7 @@
 #include "WiFi.h"
 #include "PubSubClient.h"
 
+
 #include "config.h"
 
 //vars kunnen toch uit config gehaald worden
@@ -38,6 +39,7 @@ public:
     String getLastSignal();
     void setOK(); //deze methode zal een ok bericht versturen naar de broken
     void loop();  //ik weet niet zo goed wat dit doet
+    void println(String bericht);
 };
 
 #endif

@@ -27,5 +27,6 @@ public:
     void paintGevaar();
     void paintCheck(int positie);
     void paintCross(int positie);
+    void println(String bericht);
 };
 #endif

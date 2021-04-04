@@ -12,10 +12,10 @@ LCD::LCD()
 
 void LCD::setup()
 {
-    pinMode(TFT_ENABLE,OUTPUT);
-    digitalWrite(TFT_ENABLE,HIGH);
+    pinMode(TFT_ENABLE, OUTPUT);
+    digitalWrite(TFT_ENABLE, HIGH);
     tft.begin();
-    
+
     Serial.print("lcd setup");
     clear();
     tft.setCursor(1, 0);
@@ -84,4 +84,10 @@ void LCD::clear()
 {
     tft.fillScreen(ILI9341_WHITE);
     Serial.println("clear screen");
+}
+
+void LCD::println(String bericht)
+{
+    //this->clear(); //moet het scherm eerst leeg zijn? Is overschrijven ok?
+    tft.println(bericht);
 }

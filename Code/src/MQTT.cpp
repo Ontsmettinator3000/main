@@ -1,4 +1,5 @@
 #include "MQTT.h"
+#include "Monitor.h"
 
 MQTT::MQTT()
 {
@@ -9,17 +10,17 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
 {
     //deze methode wordt opgeroepen als er bericht is
     //merk op dat deze methode behoort tot MQTT, een conversie is nodig want de library wilt enkel std callbacks (geen MQTT)
-    Serial.print("Message arrived on topic: ");
-    Serial.print(topic);
-    Serial.print(". Message: ");
+    Monitor::printlnNoMQTT("Message arrived on topic: ");
+    Monitor::printlnNoMQTT(topic);
+    Monitor::printlnNoMQTT(". Message: ");
     String messageTemp;
 
     for (int i = 0; i < length; i++)
     {
-        Serial.print((char)message[i]);
+        //Serial.print((char)message[i]);
         messageTemp += (char)message[i];
     }
-    Serial.println();
+    Monitor::printlnNoMQTT(messageTemp);
 
     // Feel free to add more if statements to control more GPIOs with MQTT
 
@@ -38,7 +39,7 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
 
 void MQTT::setup()
 {
-    Serial.println("MQTT setup");
+    Monitor::println("MQTT setup");
     setupWifi();
     client.setServer(MQTT_SERVER, MQTT_PORT);
     using std::placeholders::_1;
@@ -53,26 +54,26 @@ void MQTT::setupWifi()
 {
 
     delay(10);
-    Serial.println("Connecting to WiFi..");
+    Monitor::println("Connecting to WiFi..");
     WiFi.mode(WIFI_STA);
     WiFi.begin(SSID_C1, PWD_C1);
     int timeWait = 0;
     while (WiFi.status() != WL_CONNECTED)
     {
         delay(500);
-        Serial.print(".");
+        Monitor::println(".");
         timeWait++;
         if (timeWait == (int)10)
         {
             WiFi.disconnect();
             WiFi.begin(SSID_C2, PWD_C2);
-            Serial.println("tweede wifi netwerk proberen");
+            Monitor::println("tweede wifi netwerk proberen");
         }
         else if (timeWait == (int)20)
         {
             WiFi.disconnect();
             WiFi.begin(SSID_C3, PWD_C3);
-            Serial.println("derde");
+            Monitor::println("derde");
         }
         else if (timeWait == (int)30)
         {
@@ -87,18 +88,18 @@ void MQTT::setupWifi()
         }
     }
 
-    Serial.println("");
-    Serial.println("WiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
+    Monitor::println("");
+    Monitor::println("WiFi connected");
+    Monitor::println("IP address: ");
+    Monitor::println(WiFi.localIP().toString());
 }
 
 void MQTT::loop()
 {
-    //Serial.println("looping");
+    //Monitor::printlnln("looping");
     if (!client.connected())
     {
-        Serial.println("reconnecting");
+        Monitor::println("reconnecting");
         reconnect();
     }
     client.loop();
@@ -116,19 +117,19 @@ void MQTT::reconnect()
 
     while (!client.connected())
     {
-        Serial.print("Attempting MQTT connection...");
+        Monitor::println("Attempting MQTT connection...");
         // Attempt to connect
         if (client.connect(clientID, willTopic_c, willQoS_c, willRetain_c, willMessage_c))
         {
-            Serial.println("connected");
+            Monitor::println("connected");
             // Subscribe
             client.subscribe("esp32/ontsmetten/#");
         }
         else
         {
-            Serial.print("failed, rc=");
-            Serial.print(client.state());
-            Serial.println(" try again in 5 seconds");
+            Monitor::println("failed, rc=");
+            Monitor::println((String)client.state());
+            Monitor::println(" try again in 5 seconds");
             // Wait 5 seconds before retrying
             for (int i = 0; i < 10; i++)
             {
@@ -155,4 +156,9 @@ String MQTT::getLastSignal()
 void MQTT::setOK()
 {
     client.publish("esp32/ontsmetten/control", "OK");
+}
+
+void MQTT::println(String bericht)
+{
+    client.publish("esp32/ontsmetten/monitor", bericht.c_str());
 }
