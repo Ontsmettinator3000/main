@@ -30,7 +30,7 @@ void IRSensor::risingIR()
 
 void IRSensor::setup()
 {
-    pinMode(IRbeam, INPUT_PULLUP);
+    pinMode(IRbeam, INPUT_PULLDOWN);
 }
 
 void IRSensor::enable()
