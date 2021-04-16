@@ -8,9 +8,9 @@ class IRSensor
 private:
     uint32_t timeSinceHandDetected = 0;
     uint32_t timeSinceDown = 0;
-    bool handDetected = false;
 
 public:
+    bool handDetected = false;
     IRSensor();
     void fallingIR();
     void risingIR();
@@ -18,5 +18,6 @@ public:
     bool enabled = false;
     void enable();
     void disable();
+    void loop();
 };
 #endif

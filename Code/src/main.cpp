@@ -21,21 +21,12 @@ MQTT mqtt;
 Speaker speaker;
 
 //IR IRS
-void IRAM_ATTR ISRIRfalling();
-void IRAM_ATTR ISRIRrising();
 
 //Pomp vars
 void pomp();
 uint32_t lastPump = 0;
 uint32_t pumpDelay = 10;
 bool busyPomp = false;
-
-void IRAM_ATTR ISRIRrising()
-{
-  detachInterrupt(digitalPinToInterrupt(IRbeam));
-  handDetector.risingIR();
-  busyPomp = true;
-}
 
 void pomp()
 {
@@ -93,6 +84,7 @@ void loop(void)
   //signaal lezen van broker
   mqtt.loop();
   speaker.loop();
+  handDetector.loop();
   if (mqtt.getCurrentSignal() == "REBOOT")
   {
     ESP.restart();
@@ -136,15 +128,12 @@ void loop(void)
         Monitor::println("valid tag");
         nfcHandler.disable();
         handDetector.enable();
-        attachInterrupt(IRbeam, ISRIRrising, RISING);
       }
     }
   }
   //busy pomp zal true zijn als er moet gepompt worden (wordt true gezet door ir beam)
-  if (busyPomp)
+  if (handDetector.handDetected)
   {
-    busyPomp = false;
-    detachInterrupt(IRbeam);
     handDetector.disable();
     pomp();
     scherm.paintCheck(login.getUserCount() - 1);
