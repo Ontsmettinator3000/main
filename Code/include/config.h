@@ -23,13 +23,13 @@ LED pins:
 #define CONFIG_H
 
 #include "Arduino.h"
-#include <LiquidCrystal.h>
 
-#define playerCount 2
+///General
+#define playerCount 4
+#define LEDPIN 12
 
 ///IR beam
-#define IRbeam 18
-#define LEDPIN 2
+#define IRbeam 35
 
 #define detectDelay 10
 #define downDelay 10
@@ -42,13 +42,13 @@ LED pins:
 #define DELAY_BETWEEN_CARDS 500
 
 ///Login
+//#define groepsOntsmetting //iedereen zal moeten ontsmet worden bij alarm
+#define duoOntsmetting
 
 ///LCD scherm
-<<<<<<< Updated upstream
-#define rs 19 == == == =
-#define rs 33 
->>>>>>> Stashed changes
-                           #define en 32
+
+#define rs 19
+#define en 32
 #define d4 25
 #define d5 26
 #define d6 27
@@ -56,16 +56,43 @@ LED pins:
 //
 //LiquidCrystal lcd(rs, en, d4, d5, d6, d7);                  //Deze defined de lcd pinnen al denk ik
 
+#define TFT_CS 25
+#define TFT_RST 32
+#define TFT_DC 27
+#define TFT_MOSI 23
+#define TFT_CLK 18
+#define TFT_MISO 19
+#define TFT_ENABLE 17
+//Alarm
+#define AlarmPin 26
+#define SpeakerEnable 33
+
+// Pomp
+#define PWMchannel 1
+#define PWMfrequency 5000
+#define PompPin 2
+
 ///MQTT
 //_C is nodig omdat de naam anders overlapt met andere variabelen van een library, c heeft niet echt een betekenis
 //#define SSID_C "wie dit leest is dom"
 
-#define SSID_C "NETGEAR68"
-//#define PWD_C "stefissexy"
-#define PWD_C "excitedtuba713"
 //#define MQTT_SERVER "broker.hivemq.com"
 #define MQTT_SERVER "192.168.1.2"
+
+#define SSID_C1 "NETGEAR68"
+#define SSID_C2 "Proximus-Home-5210"
+#define SSID_C3 "Veirken_2.4"
+
+#define PWD_C1 "excitedtuba713"
+#define PWD_C2 "wecxmu3js3azf"
+#define PWD_C3 "katrien-geert"
+
+#define MQTT_SERVER "broker.hivemq.com"
+//#define MQTT_SERVER "192.168.1.2"
+
 #define MQTT_PORT 1883
+#define OTA_PWD "baksjetamara"
+#define OTA_HOSTNAME "ESP32ontsmetting"
 
 #define clientID "ESP32ontsmetting"
 //#define username NULL

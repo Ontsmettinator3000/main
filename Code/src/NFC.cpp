@@ -12,33 +12,35 @@ void NFC::setup()
     uint32_t versiondata = nfc.getFirmwareVersion();
     if (!versiondata)
     {
+        setupped = false;
         Serial.print("Didn't find PN532 board");
-        while (1)
-            ; // halt
+        for (int i = 0; i < 10; i++)
+        {
+            digitalWrite(LEDPIN, HIGH);
+            delay(100);
+            digitalWrite(LEDPIN, LOW);
+            delay(100);
+        }
     }
-
-#ifdef debug
-    // Got ok data, print it out!
-    Serial.print("Found chip PN5");
-    Serial.println((versiondata >> 24) & 0xFF, HEX);
-    Serial.print("Firmware ver. ");
-    Serial.print((versiondata >> 16) & 0xFF, DEC);
-    Serial.print('.');
-    Serial.println((versiondata >> 8) & 0xFF, DEC);
-#endif
-
-    // configure board to read RFID tags
-    nfc.SAMConfig();
-    startListeningToNFC();
+    else
+    {
+        setupped = true;
+        // configure board to read RFID tags
+        nfc.SAMConfig();
+        startListeningToNFC();
+    }
 }
 
 void NFC::startListeningToNFC()
 {
     // Reset our IRQ indicators
-    irqPrev = irqCurr = HIGH;
+    if (setupped)
+    {
+        irqPrev = irqCurr = HIGH;
 
-    Serial.println("Present an ISO14443A Card ...");
-    nfc.startPassiveTargetIDDetection(PN532_MIFARE_ISO14443A);
+        Serial.println("Present an ISO14443A Card ...");
+        nfc.startPassiveTargetIDDetection(PN532_MIFARE_ISO14443A);
+    }
 }
 
 String NFC::handleCardDetected()
@@ -114,8 +116,7 @@ String NFC::hexToString(uint8_t *cardid)
 
 String NFC::getCardDetected()
 {
-    if (enabled) //deze enabled zal door ons aan en uit gezet worden (dit geeft aan of we gaan registreren ofniet)
-
+    if (enabled && setupped) //deze enabled zal door ons aan en uit gezet worden (dit geeft aan of we gaan registreren ofniet)
     {
         if (readerDisabled) //deze enabled zal door de library geschakeld worden (zorgt voor een delay tussen 2 scans)
         {
@@ -139,7 +140,7 @@ String NFC::getCardDetected()
                 cardDetected = true;
                 timeSinceCardDetected = millis();
                 id = handleCardDetected();
-                //Serial.println(id);
+                Serial.println(id);
             }
             irqPrev = irqCurr;
             return id;

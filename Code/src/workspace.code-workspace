@@ -1,0 +1,56 @@
+{
+	"folders": [
+		{
+			"name": "LCD-Testing",
+			"path": "../../../LCD-testing/LCD-Testing"
+		},
+		{
+			"name": "Code",
+			"path": ".."
+		},
+		{
+			"name": "wifi-mqtt-esp32",
+			"path": "../../../../../../GitHub/wifi-mqtt-esp32"
+		},
+		{
+			"name": "pomp",
+			"path": "../../../../../../PlatformIO/Projects/pomp"
+		},
+		{
+			"name": "buzzer",
+			"path": "../../../../../../PlatformIO/Projects/buzzer"
+		},
+		{
+			"name": "BreakbeamSensor",
+			"path": "../../../BreakbeamSensor"
+		},
+		{
+			"name": "Speaker2",
+			"path": "../../../Audio/Speaker2"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"__bit_reference": "cpp",
+			"__hash_table": "cpp",
+			"__split_buffer": "cpp",
+			"__tree": "cpp",
+			"array": "cpp",
+			"deque": "cpp",
+			"filesystem": "cpp",
+			"forward_list": "cpp",
+			"initializer_list": "cpp",
+			"iterator": "cpp",
+			"list": "cpp",
+			"map": "cpp",
+			"regex": "cpp",
+			"set": "cpp",
+			"string": "cpp",
+			"string_view": "cpp",
+			"unordered_map": "cpp",
+			"unordered_set": "cpp",
+			"valarray": "cpp",
+			"vector": "cpp"
+		}
+	}
+}

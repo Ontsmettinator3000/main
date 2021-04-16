@@ -13,7 +13,6 @@ void IRSensor::fallingIR()
     {
         handDetected = false;
         timeSinceDown = time;
-        //digitalWrite(LEDPIN, LOW);
     }
 }
 
@@ -26,14 +25,12 @@ void IRSensor::risingIR()
         handDetected = true;
         timeSinceHandDetected = time;
         Serial.println("Hand detected");
-        //digitalWrite(LEDPIN, HIGH);
     }
 }
 
 void IRSensor::setup()
 {
-    pinMode(IRbeam, INPUT);
-    pinMode(LEDPIN, OUTPUT);
+    pinMode(IRbeam, INPUT_PULLDOWN);
 }
 
 void IRSensor::enable()

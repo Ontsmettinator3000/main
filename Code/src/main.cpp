@@ -1,19 +1,24 @@
 #include <Arduino.h>
-#include <Wire.h>
-#include <SPI.h>
+#include <ArduinoOTA.h>
+
+#include "config.h"
 
 #include "Login.h"
 #include "NFC.h"
 #include "IRSensor.h"
-#include "config.h"
 #include "LCD.h"
 #include "MQTT.h"
+#include "Speaker.h"
+#include "Monitor.h"
 
 Login login;
 NFC nfcHandler;
 IRSensor handDetector;
 LCD scherm;
 MQTT mqtt;
+//Monitor monitor(&mqtt, &scherm);
+
+Speaker speaker;
 
 //IR IRS
 void IRAM_ATTR ISRIRfalling();
@@ -22,7 +27,7 @@ void IRAM_ATTR ISRIRrising();
 //Pomp vars
 void pomp();
 uint32_t lastPump = 0;
-uint32_t pumpDelay = 500;
+uint32_t pumpDelay = 10;
 bool busyPomp = false;
 
 void IRAM_ATTR ISRIRrising()
@@ -35,23 +40,40 @@ void IRAM_ATTR ISRIRrising()
 void pomp()
 {
   lastPump = millis();
-  Serial.println("Bezig met pompen");
-  digitalWrite(LEDPIN, HIGH);
+  Monitor::println("Bezig met pompen");
+  ledcWrite(PWMchannel, 230); //duty cycle van 230 is ideaal bij darm van 30cm
   for (int i = 0; i < 10; i++)
   {
-    Serial.print(".");
-    delay(500);
+    Monitor::println(".");
+    delay(100);
   }
-  Serial.println("Pompen klaar");
-  digitalWrite(LEDPIN, LOW);
+  ledcWrite(PWMchannel, 0);
+  Monitor::println("Pompen klaar");
+  digitalWrite(PompPin, LOW);
 }
 
 void setup(void)
 {
-
   Serial.begin(115200);
+  pinMode(LEDPIN, OUTPUT);
+
+  //motor setup
+  pinMode(PompPin, OUTPUT);
+  ledcSetup(PWMchannel, PWMfrequency, 8);
+  ledcAttachPin(PompPin, PWMchannel);
+
+  //TFT setup
+  scherm.setup();
+
   //MQTT setup
   mqtt.setup();
+
+  Monitor::setup(mqtt, scherm);
+
+  //OTA setup
+  ArduinoOTA.setHostname(OTA_HOSTNAME);
+  ArduinoOTA.setPassword(OTA_PWD);
+  ArduinoOTA.begin();
 
   //nfc setup
   nfcHandler.setup();
@@ -59,25 +81,47 @@ void setup(void)
   //IR setup
   handDetector.setup();
 
-  scherm.setup();
   nfcHandler.disable();
+
+  speaker.setup();
 }
 
 void loop(void)
 {
+  ArduinoOTA.handle();
+
   //signaal lezen van broker
   mqtt.loop();
-
-  if (mqtt.lastSignal != mqtt.getCurrentSignal())
+  speaker.loop();
+  if (mqtt.getCurrentSignal() == "REBOOT")
   {
-    //er is een aanpassing
-    if (mqtt.getCurrentSignal() == "ALARM")
-    {
-      Serial.println("Alarm ontvangen");
-      nfcHandler.enable();
-    }
-    mqtt.lastSignal = mqtt.currentSignal;
+    ESP.restart();
   }
+
+  //er is een aanpassing
+  if (mqtt.getCurrentSignal() == "ALARM")
+  {
+    scherm.clear();
+    Monitor::println("Alarm ontvangen");
+    scherm.paintGevaar();
+
+#ifdef groepsOntsmetting
+    for (int i = 0; i < playerCount; i++)
+    {
+      scherm.paintCross(i);
+    }
+#endif
+#ifdef duoOntsmetting
+    for (int i = 0; i < 2; i++)
+    {
+      scherm.paintCross(i);
+    }
+    login.setId(mqtt.currentId);
+#endif
+    nfcHandler.enable();
+    speaker.play();
+  }
+  mqtt.currentSignal = "";
 
   //signaal lezen van nfc indien signaal ontvangen
 
@@ -89,10 +133,10 @@ void loop(void)
     {
       if (login.login(id))
       {
-        Serial.println("valid tag");
+        Monitor::println("valid tag");
         nfcHandler.disable();
         handDetector.enable();
-        attachInterrupt(IRbeam, ISRIRrising, HIGH);
+        attachInterrupt(IRbeam, ISRIRrising, RISING);
       }
     }
   }
@@ -103,15 +147,23 @@ void loop(void)
     detachInterrupt(IRbeam);
     handDetector.disable();
     pomp();
-    if (login.getUserCount() >= playerCount)
+    scherm.paintCheck(login.getUserCount() - 1);
+
+    if (login.getUserCount() >=
+#ifdef groepsOntsmetting
+        playerCount
+#endif
+#ifdef duoOntsmetting
+        2
+#endif
+    )
     {
       mqtt.setOK();  //de rest van de puzzels laten weten dat iedereen ontsmet is
       login.reset(); //nadat iedereen is ontsmet moeten de gelezen nfc-tags verwijderd worden voor hergebruik
-      Serial.println("iedereen ontsmet");
+      Monitor::println("iedereen ontsmet");
     }
     else
     {
-
       nfcHandler.enable();
     }
   }

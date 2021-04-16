@@ -2,16 +2,31 @@
 #define LCD_H
 
 #include "config.h"
-static LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+#include "SPI.h"
+#include "Adafruit_GFX.h"
+#include "Adafruit_ILI9341.h"
+#include <Wire.h>
+#include <FS.h>
+#include <SPIFFS.h>
+
+static Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC, TFT_RST);
+
 class LCD
 {
-    private:
-    uint8_t count =0;
+private:
+    //uint8_t count =0;
 
-    public:
+public:
     LCD();
     void setup();
-    void update();
+    void update(int count);
 
+    void loop();
+    void clear();
+
+    void paintGevaar();
+    void paintCheck(int positie);
+    void paintCross(int positie);
+    void println(String bericht);
 };
 #endif
