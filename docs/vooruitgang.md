@@ -19,6 +19,11 @@
   - [Woensdag 17/03](#woensdag-1703)
   - [Donderdag 18/03](donderdag-1803)
   - [Zaterdag 20/03](#zaterdag-2003)
+  - [Maandag 22/03](#maandag-2203)
+  - [Dinsdag 23/03](#dinsdag-2303)
+  - [Woensdag 24/03](#woensdag-2403)
+  - [Woensdag 31/03](#woensdag-3103)
+  - [Zaterdag 03/04](#donderdag-0304)
   
 ## Vrijdag 12/02
 
@@ -120,4 +125,51 @@
 
 ## Zaterdag 20/03
 
--Controle met kleine aanpassingen aan PCB (finaal??)
+- Controle met kleine aanpassingen aan PCB (finaal??)
+
+## Maandag 22/03
+
+- Bugfixing van de PCB
+
+## Dinsdag 23/03
+
+- PCB etsen
+
+## Woensdag 24/03
+
+- Solderen en testen van de PCB
+- ESP32 is programmeerbaar via de seriele programmer
+- NFC reader is correct verbonden
+
+## Woensdag 31/03
+
+- Solderen en werking PCB verifiëren 
+- TFT-LCD scherm functioneert 
+- Speaker werkt nog niet door een softwarefout
+
+## Zaterdag 03/04
+
+- LED speelt een code af horende bij de bepaalde fouten
+- NFC werkt niet meer blokkerend
+
+## Zondag 04/04
+
+- Wifi circuleert bij verbinden tussen verschillende gebruikte wifi netwerken om dit makkelijker te maken
+- OTA getest 
+- terminal via mqtt weergeven om OTA makkelijker te maken
+- Pulupp weerstand bij IR-sensor aan PCB schema toegevoegd
+- Mute met 5V verbonden
+
+## Dinsdag 06/04
+
+- Speaker functioneert
+- Volledige testing van PCB
+
+## Donderdag 08/04
+
+- Flyback diode toegevoegd
+- Gerber files aangemaakt
+
+## Woensdag 10/04
+
+- 
