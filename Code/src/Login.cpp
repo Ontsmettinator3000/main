@@ -23,7 +23,8 @@ boolean Login::validate(String currentId)
   for (int i = 0; i < bestemtteIDS.size(); i++)
   {
     int index = bestemtteIDS.at(i);
-    if(index >=0 && index <=3){
+    if (index >= 0 && index <= 3)
+    {
       if (tags[index].compareTo(currentId) == 0)
       {
         return true;

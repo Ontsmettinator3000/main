@@ -126,6 +126,7 @@ void loop(void)
       if (login.login(id))
       {
         Monitor::println("valid tag");
+        scherm.validTag();
         nfcHandler.disable();
         handDetector.enable();
       }
@@ -136,6 +137,7 @@ void loop(void)
   {
     handDetector.disable();
     pomp();
+    scherm.clearTag();
     scherm.paintCheck(login.getUserCount() - 1);
 
     if (login.getUserCount() >=

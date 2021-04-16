@@ -91,3 +91,15 @@ void LCD::println(String bericht)
     //this->clear(); //moet het scherm eerst leeg zijn? Is overschrijven ok?
     tft.println(bericht);
 }
+
+void LCD::validTag()
+{
+    tft.setCursor(SCREEN_WIDTH / 2 - 55, 30);
+    tft.setTextSize(2);
+    tft.setTextColor(ILI9341_BLACK);
+    tft.println("Valid Tag");
+}
+void LCD::clearTag()
+{
+    tft.fillRect(90, 49 - 20, 130, 20, ILI9341_WHITE);
+}

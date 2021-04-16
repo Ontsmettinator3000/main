@@ -24,6 +24,8 @@ public:
     void loop();
     void clear();
 
+    void validTag();
+    void clearTag();
     void paintGevaar();
     void paintCheck(int positie);
     void paintCross(int positie);
