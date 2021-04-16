@@ -17,12 +17,22 @@ void IRSensor::enable()
 
 void IRSensor::disable()
 {
+    digitalWrite(LEDPIN, LOW);
     enabled = false;
     handDetected = false;
 }
 
 void IRSensor::loop()
 {
+    if (digitalRead(IRbeam))
+    {
+        digitalWrite(LEDPIN, HIGH);
+    }
+    else
+    {
+        digitalWrite(LEDPIN, LOW);
+    }
+
     if (enabled)
     {
         handDetected = digitalRead(IRbeam);
