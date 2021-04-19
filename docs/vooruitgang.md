@@ -168,15 +168,15 @@
 - Speaker functioneert
 - Volledige testing van PCB
 
+# Woensdag 7/04
+
+- 
+-
+
 ## Donderdag 08/04
 
 - Flyback diode toegevoegd
 - Gerber files aangemaakt
-
-## Woensdag 10/04
-
-- 
--
 
 ## Vrijdag 16/04
 
