@@ -23,7 +23,10 @@
   - [Dinsdag 23/03](#dinsdag-2303)
   - [Woensdag 24/03](#woensdag-2403)
   - [Woensdag 31/03](#woensdag-3103)
-  - [Zaterdag 03/04](#donderdag-0304)
+  - [Zaterdag 03/04](#zaterdag-304)
+  - [Woensdag 07/04](#woensdag-704)
+  - [Vrijdag 16/04](#vrijdag-1604)
+  - [Zondag 18/04](#zondag-1804)
   
 ## Vrijdag 12/02
 
@@ -173,3 +176,13 @@
 ## Woensdag 10/04
 
 - 
+-
+
+## Vrijdag 16/04
+
+- Ontwerp casing en alcoholbakje
+- Schrijven verslag
+
+## Zondag 18/04
+
+- Finaal ontwerp casing
