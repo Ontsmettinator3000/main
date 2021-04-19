@@ -168,7 +168,7 @@
 - Speaker functioneert
 - Volledige testing van PCB
 
-# Woensdag 7/04
+## Woensdag 7/04
 
 - 
 -
