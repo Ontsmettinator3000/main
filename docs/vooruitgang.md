@@ -24,7 +24,6 @@
   - [Woensdag 24/03](#woensdag-2403)
   - [Woensdag 31/03](#woensdag-3103)
   - [Zaterdag 03/04](#zaterdag-304)
-  - [Woensdag 07/04](#woensdag-704)
   - [Vrijdag 16/04](#vrijdag-1604)
   - [Zondag 18/04](#zondag-1804)
   
@@ -167,11 +166,6 @@
 
 - Speaker functioneert
 - Volledige testing van PCB
-
-## Woensdag 7/04
-
-- 
--
 
 ## Donderdag 08/04
 
