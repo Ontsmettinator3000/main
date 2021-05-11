@@ -13,7 +13,6 @@ LCD::LCD()
 void LCD::setup()
 {
     pinMode(TFT_ENABLE, OUTPUT);
-    digitalWrite(TFT_ENABLE, HIGH);
     tft.begin();
 
     Serial.print("lcd setup");
@@ -22,9 +21,6 @@ void LCD::setup()
     tft.setTextColor(ILI9341_WHITE);
     tft.setTextSize(2);
     tft.setRotation(3);
-
-    //count = 0;
-    //tft.print("niemand ontsmet");
 }
 
 void LCD::paintCheck(int positie)

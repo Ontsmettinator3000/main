@@ -93,6 +93,7 @@ void loop(void)
   //er is een aanpassing
   if (mqtt.getCurrentSignal() == "ALARM")
   {
+    digitalWrite(TFT_ENABLE, HIGH);
     scherm.clear();
     Monitor::println("Alarm ontvangen");
     scherm.paintGevaar();
@@ -150,6 +151,7 @@ void loop(void)
     )
     {
       mqtt.setOK();  //de rest van de puzzels laten weten dat iedereen ontsmet is
+      digitalWrite(TFT_ENABLE, LOW);
       login.reset(); //nadat iedereen is ontsmet moeten de gelezen nfc-tags verwijderd worden voor hergebruik
       Monitor::println("iedereen ontsmet");
     }
