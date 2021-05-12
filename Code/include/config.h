@@ -78,7 +78,7 @@ LED pins:
 
 //#define MQTT_SERVER "broker.hivemq.com"
 #define MQTT_SERVER "192.168.1.2"
-
+//#define MQTT_SERVER "192.168.137.1"
 #define SSID_C1 "NETGEAR68"
 #define SSID_C2 "Proximus-Home-5210"
 #define SSID_C3 "Veirken_2.4"

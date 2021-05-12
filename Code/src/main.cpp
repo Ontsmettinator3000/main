@@ -36,7 +36,7 @@ void pomp()
   for (int i = 0; i < 3; i++)
   {
     Monitor::println(".");
-    delay(90);
+    delay(55);
   }
   ledcWrite(PWMchannel, 0);
   Monitor::println("Pompen klaar");
@@ -85,6 +85,7 @@ void loop(void)
   mqtt.loop();
   speaker.loop();
   handDetector.loop();
+  scherm.loop();
   if (mqtt.getCurrentSignal() == "0")
   {
     ESP.restart();
@@ -150,8 +151,8 @@ void loop(void)
 #endif
     )
     {
-      mqtt.setOK();  //de rest van de puzzels laten weten dat iedereen ontsmet is
-      digitalWrite(TFT_ENABLE, LOW);
+      mqtt.setOK(); //de rest van de puzzels laten weten dat iedereen ontsmet is
+      scherm.setOK();
       login.reset(); //nadat iedereen is ontsmet moeten de gelezen nfc-tags verwijderd worden voor hergebruik
       Monitor::println("iedereen ontsmet");
     }

@@ -8,6 +8,7 @@
 
 LCD::LCD()
 {
+    ok = false;
 }
 
 void LCD::setup()
@@ -43,6 +44,7 @@ void LCD::paintCheck(int positie)
     }
     Serial.print("check op plaats ");
     Serial.print(positie);
+    ok = false;
 }
 
 void LCD::paintCross(int positie)
@@ -65,7 +67,14 @@ void LCD::paintCross(int positie)
     Serial.print("cross op plaats ");
     Serial.print(positie);
 }
-
+void LCD::loop()
+{
+    if (ok && (millis() - timeSinceOk) > 5000)
+    {
+        digitalWrite(TFT_ENABLE, false);
+        ok = false;
+    }
+}
 void LCD::paintGevaar()
 {
     tft.fillScreen(ILI9341_WHITE);
@@ -99,4 +108,10 @@ void LCD::validTag()
 void LCD::clearTag()
 {
     tft.fillRect(90, 49 - 20, 130, 20, ILI9341_WHITE);
+}
+
+void LCD::setOK()
+{
+    ok = true;
+    timeSinceOk = millis();
 }

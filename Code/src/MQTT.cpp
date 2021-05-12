@@ -29,7 +29,7 @@ void MQTT::callback(char *topic, byte *message, unsigned int length)
     //als er een berich binnen komt alarm, zal het current signaal op alarm gezet worden
     if (String(topic) == "esp32/ontsmetten/control")
     {
-      currentSignal = messageTemp;
+        currentSignal = messageTemp;
     }
     if (String(topic) == "esp32/ontsmetten/id")
     {
@@ -155,7 +155,11 @@ String MQTT::getLastSignal()
 
 void MQTT::setOK()
 {
-    client.publish("esp32/+/control", "2");
+    client.publish("esp32/afstand/control", "2");
+    client.publish("eps32/vaccin/control", "2");
+    client.publish("esp32/5g/control", "2");
+    client.publish("eps32/morse/control", "2");
+    client.publish("esp32/fitness/control", "2");
 }
 
 void MQTT::println(String bericht)

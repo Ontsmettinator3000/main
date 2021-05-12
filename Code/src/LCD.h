@@ -15,6 +15,8 @@ class LCD
 {
 private:
     //uint8_t count =0;
+    boolean ok;
+    uint8_t timeSinceOk = 0;
 
 public:
     LCD();
@@ -30,5 +32,6 @@ public:
     void paintCheck(int positie);
     void paintCross(int positie);
     void println(String bericht);
+    void setOK();
 };
 #endif
