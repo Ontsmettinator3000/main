@@ -63,19 +63,19 @@ void MQTT::setupWifi()
         delay(500);
         Monitor::println(".");
         timeWait++;
-        if (timeWait == (int)10)
+        if (timeWait == (int)20)
         {
             WiFi.disconnect();
             WiFi.begin(SSID_C2, PWD_C2);
             Monitor::println("tweede wifi netwerk proberen");
         }
-        else if (timeWait == (int)20)
+        else if (timeWait == (int)40)
         {
             WiFi.disconnect();
             WiFi.begin(SSID_C3, PWD_C3);
             Monitor::println("derde");
         }
-        else if (timeWait == (int)30)
+        else if (timeWait == (int)60)
         {
             for (int i = 0; i < 10; i++)
             {
@@ -155,7 +155,7 @@ String MQTT::getLastSignal()
 
 void MQTT::setOK()
 {
-    client.publish("esp32/ontsmetten/control", "OK");
+    client.publish("esp32/+/control", "2");
 }
 
 void MQTT::println(String bericht)

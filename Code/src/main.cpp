@@ -32,11 +32,11 @@ void pomp()
 {
   lastPump = millis();
   Monitor::println("Bezig met pompen");
-  ledcWrite(PWMchannel, 230); //duty cycle van 230 is ideaal bij darm van 30cm
-  for (int i = 0; i < 10; i++)
+  ledcWrite(PWMchannel, 255); //duty cycle van 230 is ideaal bij darm van 30cm
+  for (int i = 0; i < 3; i++)
   {
     Monitor::println(".");
-    delay(100);
+    delay(90);
   }
   ledcWrite(PWMchannel, 0);
   Monitor::println("Pompen klaar");
@@ -85,13 +85,13 @@ void loop(void)
   mqtt.loop();
   speaker.loop();
   handDetector.loop();
-  if (mqtt.getCurrentSignal() == "REBOOT")
+  if (mqtt.getCurrentSignal() == "0")
   {
     ESP.restart();
   }
 
   //er is een aanpassing
-  if (mqtt.getCurrentSignal() == "ALARM")
+  if (mqtt.getCurrentSignal() == "1")
   {
     digitalWrite(TFT_ENABLE, HIGH);
     scherm.clear();

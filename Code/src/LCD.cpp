@@ -13,6 +13,7 @@ LCD::LCD()
 void LCD::setup()
 {
     pinMode(TFT_ENABLE, OUTPUT);
+    digitalWrite(TFT_ENABLE, LOW);
     tft.begin();
 
     Serial.print("lcd setup");
